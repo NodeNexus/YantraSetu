@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>How It Works - YantraSetu</title>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>YantraSetu: Technical Architecture & Pipeline</h1>
+    <p><em>End-to-End Tri-Modal Machine Health Monitoring on Edge Hardware</em></p>
+  </header>
+
+  <hr>
+
+  <!-- Navigation -->
+  <nav>
+    <p>
+      <strong>Navigation:</strong>
+      <a href="/">Overview</a> |
+      <a href="/how-it-works">How It Works & Architecture</a> |
+      <a href="/live-demo">Live Telemetry Demo</a> |
+      <a href="/feasibility">BOM Cost & Feasibility</a> |
+      <a href="/team">Team & Pilot Request</a>
+    </p>
+  </nav>
+
+  <hr>
+
+  <main>
+
+    <!-- Architecture Diagram -->
+    <section>
+      <h2>1. System Architecture Flow</h2>
+      <pre>
++-----------------------------------------------------------------------------------------+
+|                                1. PHYSICAL SENSOR LAYER                                 |
+|                                                                                         |
+|   [ Thermal IR Camera ]          [ 20 kHz Accelerometer ]       [ 16 kHz Microphone ]   |
+|     (MLX90640 Array)               (Piezo/MEMS on bearing)       (Industrial Acoustic)  |
++------------------------------+-------------------------------+--------------------------+
+                               |                               |
+                               v                               v
++-----------------------------------------------------------------------------------------+
+|                               2. EDGE INGESTION &amp; BUFFERING                              |
+|                              (Raspberry Pi 4 - Linux OS)                                |
+|   * Frame rate: 4-8 FPS          * Sampling: 20,480 pts/snap     * Audio windows: 1-2s  |
+|   * Radiant matrix decoding      * Rolling time-series buffer    * 16-bit PCM streaming |
++------------------------------+-------------------------------+--------------------------+
+                               |                               |
+                               v                               v
++-----------------------------------------------------------------------------------------+
+|                               3. FEATURE EXTRACTION PIPELINE                            |
+|                                                                                         |
+|   * Hotspot max/mean temp        * Time-domain: RMS, Kurtosis,   * 61 audio features:   |
+|   * Spatial gradient &amp; delta T     Crest Factor, Peak-to-Peak      MFCCs, Spectral Flux,|
+|   * Thermal centroid drift       * Freq-domain: FFT harmonics      Octave-band energies |
++------------------------------+-------------------------------+--------------------------+
+                               |                               |
+                               v                               v
++-----------------------------------------------------------------------------------------+
+|                               4. LIGHTWEIGHT ML INFERENCE                               |
+|                                                                                         |
+|   [ MobileNetV3-Small ]          [ Statistical Baseline &amp; RF ]   [ Logistic Regression] |
+|   (6 thermal health states)      (IMS Bearing anomaly curve)     (Acoustic outlier model)|
++------------------------------+-------------------------------+--------------------------+
+                               |                               |
+                               v                               v
++-----------------------------------------------------------------------------------------+
+|                               5. LAYERED CONFIDENCE GATE                                |
+|                                                                                         |
+|   * Suppresses isolated spurious spikes &amp; sensor noise                                   |
+|   * Temporal smoothing (consecutive anomaly requirement)                                |
+|   * Status logic: Healthy -&gt; Investigating (Not Sure) -&gt; Warning -&gt; Critical Alarm       |
++-----------------------------------------------------------------------------------------+
+                               |
+                               v
++-----------------------------------------------------------------------------------------+
+|                               6. OPERATOR CONSUMPTION LAYER                             |
+|                                                                                         |
+|   * Local Browser UI (React/HTML over local factory WiFi/Ethernet)                      |
+|   * Relay trigger for physical audio-visual siren tower                                 |
+|   * Optional SMS / WhatsApp alert dispatcher to plant supervisor                        |
++-----------------------------------------------------------------------------------------+
+      </pre>
+    </section>
+
+    <hr>
+
+    <!-- The 3 Modalities -->
+    <section>
+      <h2>2. The Three Modalities Explained</h2>
+      
+      <h3>Modality A: Infrared Thermal Imaging</h3>
+      <p>
+        <strong>Role:</strong> Detects friction-induced heat buildup, inadequate bearing lubrication, electrical stator insulation degradation, and cooling fin clogging.
+      </p>
+      <ul>
+        <li><strong>Sensor:</strong> MLX90640 Far-Infrared sensor (32 &times; 24 thermopile array, 55&deg; or 110&deg; Field of View).</li>
+        <li><strong>Processing:</strong> Spatial temperature map analysis extracting maximum surface hotspot, mean casing temperature, and thermal gradient relative to ambient.</li>
+        <li><strong>Model:</strong> MobileNetV3-Small deep learning model trained on thermal motor images, achieving 96.1% top-3 accuracy across distinct operating conditions.</li>
+      </ul>
+
+      <h3>Modality B: High-Frequency Vibration Analysis</h3>
+      <p>
+        <strong>Role:</strong> Serves as the primary indicator for mechanical rotating defects—identifying bearing outer-race cracks, inner-race flaking, ball defect passing frequencies, and rotor unbalance.
+      </p>
+      <ul>
+        <li><strong>Sensor:</strong> Industrial contact accelerometer mounted via magnetic stud to the motor drive-end (DE) bearing housing.</li>
+        <li><strong>Processing:</strong> High-speed 20 kHz sampling capturing acceleration waveforms. Features include Root Mean Square (RMS) acceleration, Kurtosis (impulsiveness of impact blows), and Crest Factor.</li>
+        <li><strong>Model:</strong> Baseline statistical calibration combined with Random Forest classification calibrated on NASA IMS run-to-failure benchmarks.</li>
+      </ul>
+
+      <h3>Modality C: Acoustic Noise Emission</h3>
+      <p>
+        <strong>Role:</strong> Captures airborne mechanical chattering, high-frequency cavitation in pumps, valve leakage, and acoustic friction preceding measurable thermal rise.
+      </p>
+      <ul>
+        <li><strong>Sensor:</strong> Directional MEMS microphone enclosed in a directional acoustic baffle.</li>
+        <li><strong>Processing:</strong> 16 kHz audio streaming decomposed into 61 frequency and psychoacoustic features (Mel-Frequency Cepstral Coefficients, spectral centroid, spectral rolloff, and octave band energies).</li>
+        <li><strong>Model:</strong> L2-regularized acoustic anomaly detector achieving 97.6% recall on industrial sound benchmarks.</li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <!-- The Confidence Gate -->
+    <section>
+      <h2>3. The Innovation: The Layered Confidence Gate</h2>
+      <p>
+        The primary operational flaw of early-generation machine health monitors on Indian shop floors is <strong>false alarm fatigue</strong>. When a tool drops near a motor or ambient factory temperatures spike at midday in Nagpur (exceeding 44&deg;C), conventional threshold alarms trigger false plant shutdowns. Operators quickly disconnect the sensors in frustration.
+      </p>
+      <p>
+        YantraSetu resolves this through a three-stage gating mechanism:
+      </p>
+      <ol>
+        <li><strong>Ambient Normalization:</strong> Thermal thresholds dynamically adapt to ambient workshop temperatures rather than applying rigid static cutoffs.</li>
+        <li><strong>Temporal Confirmation:</strong> An anomaly must persist across multiple consecutive measurement windows before escalating from <em>Investigating</em> to <em>Warning</em>.</li>
+        <li><strong>Transparent "Not Sure" State:</strong> When sensor confidence drops below mathematical reliability thresholds, the system flags "Learning / Evaluating" instead of crying wolf.</li>
+      </ol>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      &copy; 2026 YantraSetu Innovation Initiative &bull; Idea Lab, Ramdeobaba University, Nagpur
+    </p>
+    <p>
+      <a href="/">Back to Overview</a> | <a href="/live-demo">Proceed to Live Demo &rarr;</a>
+    </p>
+  </footer>
+
+</body>
+</html>

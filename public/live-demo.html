@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Demo - YantraSetu</title>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>YantraSetu: Live Telemetry &amp; Anomaly Simulator</h1>
+    <p><em>Simulating continuous edge telemetry streaming from a shop-floor induction motor</em></p>
+  </header>
+
+  <hr>
+
+  <!-- Navigation -->
+  <nav>
+    <p>
+      <strong>Navigation:</strong>
+      <a href="/">Overview</a> |
+      <a href="/how-it-works">How It Works & Architecture</a> |
+      <a href="/live-demo">Live Telemetry Demo</a> |
+      <a href="/feasibility">BOM Cost & Feasibility</a> |
+      <a href="/team">Team & Pilot Request</a>
+    </p>
+  </nav>
+
+  <hr>
+
+  <main>
+
+    <!-- Operational State Banner -->
+    <section>
+      <h2>1. Target Machine State</h2>
+      <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+          <td><strong>Machine ID:</strong></td>
+          <td><span id="machine-id">MTR-IND-04</span></td>
+          <td><strong>Asset Type:</strong></td>
+          <td><span id="machine-type">Three-Phase Induction Motor (5 HP, 1440 RPM)</span></td>
+        </tr>
+        <tr>
+          <td><strong>Connection Mode:</strong></td>
+          <td><strong style="color: green;">LIVE WEBSOCKET / REST FEED</strong></td>
+          <td><strong>System Health:</strong></td>
+          <td><span id="system-status"><strong>HEALTHY / NORMAL</strong></span></td>
+        </tr>
+        <tr>
+          <td><strong>Last Updated:</strong></td>
+          <td colspan="3"><span id="telemetry-time">Connecting...</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <br>
+
+    <!-- Live Multi-Sensor Telemetry Table -->
+    <section>
+      <h2>2. Live Modality Telemetry Feed</h2>
+      <p>
+        <em>Note: This data is streamed dynamically from the <code>/api/telemetry</code> endpoint on this web service.</em>
+      </p>
+
+      <table border="1" cellpadding="8" cellspacing="0" width="100%">
+        <thead>
+          <tr bgcolor="#f0f0f0">
+            <th>Modality</th>
+            <th>Primary Sensor</th>
+            <th>Live Metric Readings</th>
+            <th>Safety Threshold</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Thermal (Heat)</strong></td>
+            <td>MLX90640 Far-Infrared Array</td>
+            <td>
+              Mean Temp: <strong><span id="therm-mean">--</span> &deg;C</strong><br>
+              Peak Hotspot: <strong><span id="therm-max">--</span> &deg;C</strong>
+            </td>
+            <td>75.0 &deg;C (Max Hotspot)</td>
+            <td><span id="therm-status"><strong>NORMAL</strong></span></td>
+          </tr>
+          <tr>
+            <td><strong>Vibration (Dynamics)</strong></td>
+            <td>High-kHz Accelerometer (Drive End)</td>
+            <td>
+              RMS Velocity: <strong><span id="vib-rms">--</span> g</strong><br>
+              Kurtosis: <strong><span id="vib-kurtosis">--</span></strong> (ISO 10816 baseline: &lt;3.5)
+            </td>
+            <td>0.600 g (RMS Alert)</td>
+            <td><span id="vib-status"><strong>NORMAL</strong></span></td>
+          </tr>
+          <tr>
+            <td><strong>Acoustic (Sound)</strong></td>
+            <td>Directional MEMS Microphone (16 kHz)</td>
+            <td>
+              Sound Level: <strong><span id="snd-db">--</span> dB</strong><br>
+              Anomaly Score: <strong><span id="snd-score">--</span></strong>
+            </td>
+            <td>Score &gt; 0.400 (Fault Probability)</td>
+            <td><span id="snd-status"><strong>NORMAL</strong></span></td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <br>
+
+    <!-- Confidence Gate Summary -->
+    <section>
+      <h2>3. Layered Confidence Gate Status</h2>
+      <table border="1" cellpadding="6" cellspacing="0">
+        <tr>
+          <td><strong>Gate Assessment:</strong></td>
+          <td><span id="gate-pass">PASSED - Signal Validated</span></td>
+        </tr>
+        <tr>
+          <td><strong>Confidence Level:</strong></td>
+          <td><span id="gate-conf">HIGH (96.4%)</span></td>
+        </tr>
+        <tr>
+          <td><strong>Suppressed Spurious Alarms:</strong></td>
+          <td><span id="gate-suppressed">14 transient spikes filtered today</span></td>
+        </tr>
+      </table>
+    </section>
+
+    <br>
+
+    <!-- Simulated Event Log -->
+    <section>
+      <h2>4. Recent Machine Anomaly &amp; Audit Log</h2>
+      <table border="1" cellpadding="6" cellspacing="0" width="100%">
+        <thead>
+          <tr bgcolor="#f0f0f0">
+            <th>Timestamp</th>
+            <th>Modality</th>
+            <th>Severity</th>
+            <th>Diagnostic Event Description</th>
+            <th>Recommended Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Today, 08:14:22</td>
+            <td>Vibration</td>
+            <td>INFO</td>
+            <td>Baseline calibration completed across 1,000 continuous revolutions.</td>
+            <td>None (Operational baseline locked).</td>
+          </tr>
+          <tr>
+            <td>Today, 09:30:15</td>
+            <td>Thermal</td>
+            <td>NOTICE</td>
+            <td>Ambient room temperature rise to 38.2 &deg;C. Threshold dynamically offset +3 &deg;C.</td>
+            <td>Automatic calibration adjusted.</td>
+          </tr>
+          <tr>
+            <td>Today, 11:42:08</td>
+            <td>Acoustic</td>
+            <td>WARNING (FILTERED)</td>
+            <td>Transient audio peak (88 dB) detected; suppressed by Confidence Gate (duration &lt; 200 ms).</td>
+            <td>Filtered as external shop impact noise.</td>
+          </tr>
+          <tr>
+            <td>Today, 14:05:40</td>
+            <td>System</td>
+            <td>NORMAL</td>
+            <td>Edge system memory check: 1.2 GB / 4.0 GB utilized on Raspberry Pi 4.</td>
+            <td>System healthy.</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <!-- Live Updating Script -->
+  <script>
+    async function updateTelemetry() {
+      try {
+        const res = await fetch('/api/telemetry');
+        if (!res.ok) throw new Error('Network error');
+        const data = await res.json();
+
+        document.getElementById('telemetry-time').innerText = new Date(data.timestamp).toLocaleString();
+        document.getElementById('machine-id').innerText = data.machine_id;
+        document.getElementById('machine-type').innerText = data.machine_type;
+        document.getElementById('system-status').innerText = data.operational_status;
+
+        // Thermal
+        document.getElementById('therm-mean').innerText = data.modalities.thermal.mean_temperature_c;
+        document.getElementById('therm-max').innerText = data.modalities.thermal.max_hotspot_c;
+        document.getElementById('therm-status').innerText = data.modalities.thermal.status;
+
+        // Vibration
+        document.getElementById('vib-rms').innerText = data.modalities.vibration.rms_g;
+        document.getElementById('vib-kurtosis').innerText = data.modalities.vibration.kurtosis;
+        document.getElementById('vib-status').innerText = data.modalities.vibration.status;
+
+        // Acoustic
+        document.getElementById('snd-db').innerText = data.modalities.acoustic.sound_level_db;
+        document.getElementById('snd-score').innerText = data.modalities.acoustic.anomaly_probability;
+        document.getElementById('snd-status').innerText = data.modalities.acoustic.status;
+
+        // Gate
+        document.getElementById('gate-conf').innerText = data.confidence_gate.confidence_level;
+        document.getElementById('gate-suppressed').innerText = data.confidence_gate.suppressed_false_alarms + ' transient spikes filtered today';
+      } catch (err) {
+        document.getElementById('telemetry-time').innerText = 'Reconnecting to telemetry feed... (' + err.message + ')';
+      }
+    }
+
+    // Initial load and periodic refresh every 2.5 seconds
+    updateTelemetry();
+    setInterval(updateTelemetry, 2500);
+  </script>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      &copy; 2026 YantraSetu Innovation Initiative &bull; Idea Lab, Ramdeobaba University, Nagpur
+    </p>
+    <p>
+      <a href="/how-it-works">&larr; How It Works</a> | <a href="/feasibility">Proceed to Feasibility &amp; BOM &rarr;</a>
+    </p>
+  </footer>
+
+</body>
+</html>

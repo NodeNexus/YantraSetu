@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>YantraSetu - Multimodal Machine Health Monitoring</title>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <h1>YantraSetu (यंत्रसेतु)</h1>
+    <p><strong>Multimodal Machine Health Monitoring & Early Anomaly Detection for Industrial MSMEs</strong></p>
+    <p><em>Idea Lab, Ramdeobaba University, Nagpur &bull; Project Code: 24CS03PR0504</em></p>
+  </header>
+
+  <hr>
+
+  <!-- Navigation -->
+  <nav>
+    <p>
+      <strong>Navigation:</strong>
+      <a href="/">Overview</a> |
+      <a href="/how-it-works">How It Works & Architecture</a> |
+      <a href="/live-demo">Live Telemetry Demo</a> |
+      <a href="/feasibility">BOM Cost & Feasibility</a> |
+      <a href="/team">Team & Pilot Request</a>
+    </p>
+  </nav>
+
+  <hr>
+
+  <!-- Main Content -->
+  <main>
+
+    <!-- Executive Summary -->
+    <section>
+      <h2>1. Executive Summary</h2>
+      <p>
+        <strong>YantraSetu</strong> is an affordable, edge-computing condition monitoring system designed specifically for micro, small, and medium manufacturing enterprises (MSMEs). By continuously observing a rotating machine’s <strong>thermal emission (infrared)</strong>, <strong>vibration dynamics</strong>, and <strong>acoustic noise (sound)</strong>, YantraSetu identifies early warning signs of component degradation (bearing flaking, shaft misalignment, unbalance, stator overheating) long before catastrophic mechanical failure occurs.
+      </p>
+      <blockquote>
+        "Transitioning industrial maintenance from reactive emergency fire-fighting to proactive planned repair—without requiring lakhs in proprietary SCADA investments."
+      </blockquote>
+    </section>
+
+    <hr>
+
+    <!-- The Problem -->
+    <section>
+      <h2>2. The Problem in Indian Manufacturing</h2>
+      <p>
+        Rotating machinery—including electric motors, centrifugal pumps, conveyor gearboxes, and industrial blowers—forms the core of manufacturing operations across India's industrial belts (such as MIDC Hingna and Butibori in Vidarbha, Maharashtra).
+      </p>
+      <ul>
+        <li><strong>Sudden Unplanned Breakdowns:</strong> Critical machines fail without warning, halting production lines, causing worker safety risks, and costing small units tens of thousands of rupees per downtime incident.</li>
+        <li><strong>Inadequate Manual Audits:</strong> Today, small plants rely on periodic manual rounds where a technician feels a motor with a palm or uses an isolated vibration pen once a month. Nascent defects are routinely missed.</li>
+        <li><strong>Prohibitive Commercial Costs:</strong> Imported commercial condition monitoring systems cost between ₹3,00,000 and ₹15,00,000 per installation and demand dedicated vibration vibration analysts to interpret complex FFT spectra.</li>
+      </ul>
+    </section>
+
+    <hr>
+
+    <!-- The YantraSetu Solution -->
+    <section>
+      <h2>3. The YantraSetu Solution</h2>
+      <p>
+        YantraSetu bridges the gap between manual guesswork and high-cost industrial IoT. It packages tri-modal sensing onto an inexpensive edge computer (Raspberry Pi 4) that operates directly on the factory floor without requiring expensive recurring cloud subscriptions.
+      </p>
+
+      <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Parameter</th>
+            <th>Traditional Approach</th>
+            <th>YantraSetu Edge System</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Sensing Modalities</strong></td>
+            <td>Single signal (often spot vibration or periodic IR gun)</td>
+            <td><strong>Tri-Modal:</strong> Thermal Video + High-kHz Vibration + Acoustic Sound</td>
+          </tr>
+          <tr>
+            <td><strong>Hardware Cost</strong></td>
+            <td>₹3,00,000 to ₹10,00,000+</td>
+            <td><strong>₹18,500 – ₹22,000</strong> (Complete edge node + sensors)</td>
+          </tr>
+          <tr>
+            <td><strong>Monitoring Frequency</strong></td>
+            <td>Periodic / Monthly manual surveys</td>
+            <td><strong>Continuous (24x7)</strong>, second-by-second evaluation</td>
+          </tr>
+          <tr>
+            <td><strong>Ease of Use</strong></td>
+            <td>Requires certified vibration analyst to read FFT spectra</td>
+            <td><strong>Plain-English Status:</strong> Healthy, Warning, or Critical in web browser</td>
+          </tr>
+          <tr>
+            <td><strong>Cloud Dependency</strong></td>
+            <td>Mandatory cloud upload and recurring monthly SaaS license</td>
+            <td><strong>Zero Cloud Dependency:</strong> Local network dashboard with edge inference</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr>
+
+    <!-- Key Metrics & Achievements -->
+    <section>
+      <h2>4. Key Validation Metrics</h2>
+      <table border="1" cellpadding="8" cellspacing="0">
+        <thead>
+          <tr>
+            <th>Validated Domain</th>
+            <th>Benchmark Metric</th>
+            <th>Dataset / Source</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Acoustic Machine Anomaly Detection</td>
+            <td><strong>97.6% Recall</strong> (Macro-F1: 0.88) on 537 held-out test clips</td>
+            <td>Industrial Machine Sound Dataset (MIMII / DCASE)</td>
+          </tr>
+          <tr>
+            <td>Thermal Hotspot Classification</td>
+            <td><strong>96.1% Top-3 Accuracy</strong> across 6 motor thermal fault classes</td>
+            <td>Induction Motor Thermography Benchmark</td>
+          </tr>
+          <tr>
+            <td>Vibration Run-to-Failure Analysis</td>
+            <td>Continuous RMS tracking & kurtosis anomaly detection</td>
+            <td>NASA IMS Bearing Run-to-Failure Dataset (20 kHz)</td>
+          </tr>
+          <tr>
+            <td>Edge Software Robustness</td>
+            <td><strong>199 automated unit & integration tests passing</strong></td>
+            <td>Local pytest continuous validation suite</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <hr>
+
+    <!-- Quick Action Links -->
+    <section>
+      <h2>5. Explore Further</h2>
+      <ul>
+        <li><a href="/how-it-works"><strong>Read Technical Architecture & Pipeline</strong></a> &mdash; Learn how tri-modal inputs pass through our confidence gate.</li>
+        <li><a href="/live-demo"><strong>View Live Telemetry Simulation</strong></a> &mdash; Inspect simulated real-time data streaming from a running induction motor.</li>
+        <li><a href="/feasibility"><strong>Inspect Bill of Materials (BOM) & Pilot Roadmap</strong></a> &mdash; Review hardware pricing and the 3-6-12 month rollout plan.</li>
+        <li><a href="/team"><strong>Contact Team & Request an MSME Pilot</strong></a> &mdash; Reach out for technical collaboration or field trial hosting.</li>
+      </ul>
+    </section>
+
+  </main>
+
+  <hr>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      &copy; 2026 YantraSetu Innovation Initiative &bull; Idea Lab, Ramdeobaba University, Nagpur &bull;
+      Designed for Seva Innovation Challenge 2026.
+    </p>
+    <p>
+      Deployed as a live web service on Render.
+    </p>
+  </footer>
+
+</body>
+</html>
