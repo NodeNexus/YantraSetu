@@ -3,170 +3,179 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Feasibility &amp; BOM - YantraSetu</title>
+  <title>Hardware BOM &amp; MSME Feasibility - YantraSetu</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>YantraSetu: Hardware Feasibility &amp; Implementation Plan</h1>
-    <p><em>Realistic Bill of Materials (BOM), Unit Economics, and Shop-Floor Pilot Roadmap</em></p>
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-group">
+        <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+          <div class="brand-logo-icon">&#9881;</div>
+          <div class="brand-text">
+            <h1>YANTRASETU</h1>
+            <span>AICTE Idea Lab &bull; Project 24CS03PR0504</span>
+          </div>
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a href="/">Overview</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/live-demo">Live Telemetry</a>
+        <a href="/feasibility" class="active">BOM &amp; Feasibility</a>
+        <a href="/team">Team</a>
+        <a href="/#workbench" class="btn-header-cta">&bull; Test Interactive Console</a>
+      </nav>
+    </div>
   </header>
 
-  <hr>
+  <main class="container" style="padding: 48px 24px 80px;">
 
-  <!-- Navigation -->
-  <nav>
-    <p>
-      <strong>Navigation:</strong>
-      <a href="/">Overview</a> |
-      <a href="/how-it-works">How It Works & Architecture</a> |
-      <a href="/live-demo">Live Telemetry Demo</a> |
-      <a href="/feasibility">BOM Cost & Feasibility</a> |
-      <a href="/team">Team & Pilot Request</a>
-    </p>
-  </nav>
-
-  <hr>
-
-  <main>
-
-    <!-- Complete Hardware Bill of Materials -->
-    <section>
-      <h2>1. Complete Hardware Bill of Materials (BOM)</h2>
-      <p>
-        Unlike commercial proposals that quote bare microcontroller prices to artificially mask real costs, YantraSetu provides a comprehensive, fully-itemized hardware BOM required to instrument a real industrial motor:
+    <div style="margin-bottom: 40px;">
+      <span class="badge-pill">COMMERCIAL &amp; MANUFACTURING REALITY</span>
+      <h1 style="font-size: 2.5rem; font-weight: 800; margin: 12px 0 16px;">Hardware Bill of Materials &amp; Unit Economics</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 900px;">
+        Industrial judges routinely challenge theoretical proposals that claim unrealistic pricing. Here is the fully itemized, retail-verified hardware bill of materials required to deploy one physical YantraSetu monitoring node on an active factory machine.
       </p>
+    </div>
 
-      <table border="1" cellpadding="8" cellspacing="0" width="100%">
+    <!-- Complete BOM Table -->
+    <div class="styled-table-wrapper" style="margin-bottom: 48px;">
+      <table class="styled-table">
         <thead>
-          <tr bgcolor="#f0f0f0">
-            <th>Component</th>
-            <th>Specification</th>
-            <th>Primary Function</th>
-            <th>Estimated Indian Retail Cost</th>
+          <tr>
+            <th style="width: 25%;">Subsystem Component</th>
+            <th style="width: 35%;">Component Specification</th>
+            <th style="width: 25%;">Operational Functionality</th>
+            <th style="width: 15%;">Indian Retail Price</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Edge Computing Unit</strong></td>
-            <td>Raspberry Pi 4 Model B (4 GB RAM)</td>
-            <td>Runs feature extraction, lightweight ML models, local SQLite DB, and web server</td>
-            <td>&#8377;5,500 &ndash; &#8377;5,800</td>
+            <td><strong>Edge Computing Core</strong></td>
+            <td>Raspberry Pi 4 Model B (4 GB LPDDR4, Quad-Core 1.5 GHz)</td>
+            <td>Executes on-device inference, SQLite history, and local web server</td>
+            <td style="font-family: var(--font-mono); color: #fff;">&#8377;5,500 &ndash; &#8377;5,800</td>
           </tr>
           <tr>
-            <td><strong>Thermal IR Camera Module</strong></td>
-            <td>Melexis MLX90640 (32&times;24 Far-IR, I2C)</td>
-            <td>Continuous thermal video gradient and bearing housing hotspot detection</td>
-            <td>&#8377;5,900 &ndash; &#8377;6,800</td>
+            <td><strong>Thermal IR Camera</strong></td>
+            <td>Melexis MLX90640 Far-Infrared Array (32&times;24 I2C, 55&deg; FOV)</td>
+            <td>Spatial motor surface temperature gradient and bearing hotspot tracking</td>
+            <td style="font-family: var(--font-mono); color: #fff;">&#8377;5,900 &ndash; &#8377;6,800</td>
           </tr>
           <tr>
-            <td><strong>Vibration Accelerometer</strong></td>
-            <td>High-kHz Analog MEMS (ADXL1002 / IIS3DWB) + High-Speed ADC</td>
-            <td>Captures high-frequency bearing impact pulses up to 10–20 kHz</td>
-            <td>&#8377;3,800 &ndash; &#8377;4,500</td>
+            <td><strong>High-Frequency Accelerometer</strong></td>
+            <td>Industrial Analog MEMS (ADXL1002 / IIS3DWB) + High-Speed SPI ADC</td>
+            <td>Captures high-frequency bearing impact pulses up to 20 kHz</td>
+            <td style="font-family: var(--font-mono); color: #fff;">&#8377;3,800 &ndash; &#8377;4,500</td>
           </tr>
           <tr>
-            <td><strong>Acoustic Sensor</strong></td>
-            <td>Industrial MEMS Microphone + Acoustic Horn/Baffle</td>
-            <td>Airborne friction, chattering, and cavitation detection (16 kHz PCM)</td>
-            <td>&#8377;1,200 &ndash; &#8377;1,500</td>
+            <td><strong>Acoustic Channel</strong></td>
+            <td>High-SNR Industrial MEMS Microphone + Acoustic Directional Horn</td>
+            <td>Airborne mechanical chattering, cavitation, and friction detection (16 kHz)</td>
+            <td style="font-family: var(--font-mono); color: #fff;">&#8377;1,200 &ndash; &#8377;1,500</td>
           </tr>
           <tr>
             <td><strong>Industrial Mounting &amp; Cabling</strong></td>
-            <td>Rare-earth magnetic mounting stud, shielded M12 cabling, heatsinks</td>
-            <td>Rigid acoustic and mechanical coupling to motor casing; noise shielding</td>
-            <td>&#8377;1,500 &ndash; &#8377;1,800</td>
+            <td>Rare-earth neodymium magnetic stud, shielded M12 connectors, wiring</td>
+            <td>Rigid acoustic coupling to motor bearing housing; EMI noise shielding</td>
+            <td style="font-family: var(--font-mono); color: #fff;">&#8377;1,500 &ndash; &#8377;1,800</td>
           </tr>
           <tr>
-            <td><strong>Enclosure &amp; Power</strong></td>
-            <td>IP65 dust/water-resistant NEMA enclosure, 5V/3A DIN-rail power supply</td>
-            <td>Protection against oil mist, metallic dust, and electrical voltage transients</td>
-            <td>&#8377;1,600 &ndash; &#8377;2,000</td>
+            <td><strong>Enclosure &amp; Power Supply</strong></td>
+            <td>IP65 dust/oil-proof NEMA polycarbonate box, DIN-rail 5V/3A DC supply</td>
+            <td>Ruggedized protection against shop-floor oil mist, dust, and electrical transients</td>
+            <td style="font-family: var(--font-mono); color: #fff;">&#8377;1,600 &ndash; &#8377;2,000</td>
           </tr>
-          <tr bgcolor="#f9f9f9">
-            <td colspan="3"><strong>Total Hardware Pilot Unit Cost (Single Machine Kit)</strong></td>
-            <td><strong>&#8377;19,500 &ndash; &#8377;22,400</strong></td>
+          <tr style="background: rgba(6, 182, 212, 0.12); font-weight: 800;">
+            <td colspan="3" style="color: #fff; font-size: 1.05rem;">TOTAL COMPLETE HARDWARE PILOT KIT (SINGLE MACHINE)</td>
+            <td style="color: var(--accent-cyan); font-family: var(--font-mono); font-size: 1.2rem;">&#8377;19,500 &ndash; &#8377;22,400</td>
           </tr>
         </tbody>
       </table>
-    </section>
+    </div>
 
-    <hr>
-
-    <!-- Economic Payback for MSMEs -->
-    <section>
-      <h2>2. Economic Return on Investment (ROI) for Indian MSMEs</h2>
-      <p>
-        Consider a typical small auto-component or plastic moulding unit in MIDC Hingna running 10 machine lines:
-      </p>
-      <ul>
-        <li><strong>Average Unplanned Downtime Cost:</strong> &#8377;15,000 to &#8377;35,000 per hour (idle labor, missed dispatch penalties, ruined raw material).</li>
-        <li><strong>Cost of Single Catastrophic Motor Burnout:</strong> &#8377;45,000 (replacement + rewind + 8 hours downtime).</li>
-        <li><strong>YantraSetu Initial Investment:</strong> Approx. &#8377;21,000 one-time hardware per critical machine.</li>
-        <li><strong>Payback Period:</strong> <em>Less than 2 months</em> if just one catastrophic line failure is avoided.</li>
-      </ul>
-    </section>
-
-    <hr>
-
-    <!-- 12-Month Implementation Roadmap -->
-    <section>
-      <h2>3. 12-Month Implementation &amp; Validation Roadmap</h2>
-      
-      <table border="1" cellpadding="8" cellspacing="0" width="100%">
+    <!-- Comparative Economics -->
+    <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 24px;">Commercial Market Comparison</h2>
+    <div class="styled-table-wrapper" style="margin-bottom: 48px;">
+      <table class="styled-table">
         <thead>
-          <tr bgcolor="#f0f0f0">
-            <th>Milestone</th>
-            <th>Duration</th>
-            <th>Technical Deliverables</th>
-            <th>Validation Criteria</th>
+          <tr>
+            <th>Solution Type</th>
+            <th>Upfront Initial Cost</th>
+            <th>Recurring Cloud Fee</th>
+            <th>Expert Requirement</th>
+            <th>Suitability for Indian MSMEs</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Phase 1: Lab Rig Instrumentation</strong></td>
-            <td>Months 0 &ndash; 3</td>
-            <td>
-              &bull; Mount MLX90640, accelerometer, and microphone onto a 5 HP test motor in the RBU Mechanical Lab.<br>
-              &bull; Calibrate baseline ambient normalization algorithms across morning/afternoon heat cycles.
-            </td>
-            <td>Live sensor telemetry streaming continuously for 72 consecutive hours without memory leaks.</td>
+            <td><strong>Commercial SCADA Systems (Siemens / GE)</strong></td>
+            <td>&#8377;5,00,000 to &#8377;15,00,000+</td>
+            <td>Mandatory (&#8377;40,000/yr)</td>
+            <td>Requires ISO Certified Vibration Specialist</td>
+            <td style="color: var(--accent-red); font-weight: 600;">Economically Inaccessible for 95% of MSMEs</td>
           </tr>
           <tr>
-            <td><strong>Phase 2: Controlled Fault Seeding</strong></td>
-            <td>Months 3 &ndash; 6</td>
-            <td>
-              &bull; Seed known mechanical defects under controlled supervision: angular shaft misalignment (0.5 mm), unbalance masses, and outer-race bearing EDM notch.<br>
-              &bull; Tune Confidence Gate thresholds and verify false-alarm suppression under shop noise.
-            </td>
-            <td>&gt;90% anomaly detection rate on seeded defects with zero false trips during healthy load cycling.</td>
+            <td><strong>Periodic Third-Party Survey Consultants</strong></td>
+            <td>Zero hardware</td>
+            <td>&#8377;15,000 &ndash; &#8377;30,000 per monthly visit</td>
+            <td>Done by visiting consultant</td>
+            <td style="color: var(--accent-amber); font-weight: 600;">Blind to sudden failures between monthly visits</td>
           </tr>
-          <tr>
-            <td><strong>Phase 3: Field Pilot in MSME Workshop</strong></td>
-            <td>Months 6 &ndash; 12</td>
-            <td>
-              &bull; Deploy 3 pilot nodes on active production lines in an industrial workshop (MIDC Hingna / Butibori).<br>
-              &bull; Collect operator feedback and train plant maintenance technicians on dashboard alerts.
-            </td>
-            <td>Operational survival over 6 months in high-dust/oil environment; positive maintenance team sign-off.</td>
+          <tr style="background: rgba(16, 185, 129, 0.08);">
+            <td><strong>YantraSetu Indigenous Edge System</strong></td>
+            <td><strong>&#8377;19,500 &ndash; &#8377;22,400</strong></td>
+            <td><strong>&#8377;0 (Zero Cloud Dependency)</strong></td>
+            <td><strong>Plain-English Operator Status</strong></td>
+            <td style="color: var(--accent-green); font-weight: 700;">Purpose-Built for Indian Workshop Economics</td>
           </tr>
         </tbody>
       </table>
-    </section>
+    </div>
+
+    <!-- 12-Month Pilot Plan -->
+    <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 24px;">The 12-Month Field Implementation Plan</h2>
+    <div class="grid-3" style="margin-bottom: 40px;">
+      <div class="feature-card">
+        <span class="badge-pill" style="margin-bottom: 12px;">MONTHS 0 &ndash; 3</span>
+        <h3 style="font-size: 1.15rem; color: #fff; margin-bottom: 8px;">Phase 1: Lab Test Motor Setup</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          Mount physical MLX90640, accelerometer, and microphone onto a 5 HP test induction motor in the university mechanical lab. Verify continuous 72-hour zero-leak telemetry streaming over I2C and SPI buses.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <span class="badge-pill" style="margin-bottom: 12px; border-color: var(--accent-amber); color: var(--accent-amber);">MONTHS 3 &ndash; 6</span>
+        <h3 style="font-size: 1.15rem; color: #fff; margin-bottom: 8px;">Phase 2: Controlled Fault Seeding</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          Artificially induce calibrated physical defects: 0.5 mm angular shaft misalignment, dynamic rotor unbalance masses, and outer-race bearing EDM micro-notches. Validate false-alarm immunity under shop noise.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <span class="badge-pill" style="margin-bottom: 12px; border-color: var(--accent-green); color: var(--accent-green);">MONTHS 6 &ndash; 12</span>
+        <h3 style="font-size: 1.15rem; color: #fff; margin-bottom: 8px;">Phase 3: MSME Shop-Floor Trials</h3>
+        <p style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.6;">
+          Deploy 3 ruggedized pilot nodes in partner manufacturing workshops in MIDC Hingna/Butibori and public utilities (NMC municipal water pumping station), monitoring real operating machines for 6 continuous months.
+        </p>
+      </div>
+    </div>
+
+    <div style="text-align: center;">
+      <a href="/#workbench" class="btn btn-primary" style="margin-right: 16px;">&bull; Test Scenarios in Workbench</a>
+      <a href="/team" class="btn btn-secondary">Contact Team for Pilot Partnership &rarr;</a>
+    </div>
 
   </main>
 
-  <hr>
-
-  <!-- Footer -->
-  <footer>
-    <p>
-      &copy; 2026 YantraSetu Innovation Initiative &bull; Idea Lab, Ramdeobaba University, Nagpur
-    </p>
-    <p>
-      <a href="/live-demo">&larr; Back to Live Demo</a> | <a href="/team">Proceed to Team &amp; Pilot Request &rarr;</a>
-    </p>
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <div>&copy; 2026 YantraSetu &bull; Idea Lab, Ramdeobaba University, Nagpur</div>
+      <div><a href="/">Home</a> &bull; <a href="/how-it-works">Architecture</a> &bull; <a href="/feasibility">BOM</a> &bull; <a href="/team">Team</a></div>
+    </div>
   </footer>
 
 </body>

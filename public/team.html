@@ -3,190 +3,162 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Team &amp; Pilot Request - YantraSetu</title>
+  <title>Team &amp; Pilot Collaboration - YantraSetu</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>YantraSetu: Team &amp; Pilot Partnership</h1>
-    <p><em>Innovation Team &bull; Idea Lab, Ramdeobaba University, Nagpur &bull; Project Code: 24CS03PR0504</em></p>
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-group">
+        <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+          <div class="brand-logo-icon">&#9881;</div>
+          <div class="brand-text">
+            <h1>YANTRASETU</h1>
+            <span>AICTE Idea Lab &bull; Project 24CS03PR0504</span>
+          </div>
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a href="/">Overview</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/live-demo">Live Telemetry</a>
+        <a href="/feasibility">BOM &amp; Feasibility</a>
+        <a href="/team" class="active">Team</a>
+        <a href="/#workbench" class="btn-header-cta">&bull; Test Interactive Console</a>
+      </nav>
+    </div>
   </header>
 
-  <hr>
+  <main class="container" style="padding: 48px 24px 80px;">
 
-  <!-- Navigation -->
-  <nav>
-    <p>
-      <strong>Navigation:</strong>
-      <a href="/">Overview</a> |
-      <a href="/how-it-works">How It Works & Architecture</a> |
-      <a href="/live-demo">Live Telemetry Demo</a> |
-      <a href="/feasibility">BOM Cost & Feasibility</a> |
-      <a href="/team">Team & Pilot Request</a>
-    </p>
-  </nav>
-
-  <hr>
-
-  <main>
-
-    <!-- Team Members Section -->
-    <section>
-      <h2>1. The Innovation Team</h2>
-      <p>
-        Developed under the auspices of the <strong>AICTE Idea Lab</strong> at <strong>Ramdeobaba University (RBU), Nagpur</strong> for the <em>Seva Innovation Challenge 2026</em>.
+    <div style="margin-bottom: 40px;">
+      <span class="badge-pill">RESEARCH STEWARDSHIP</span>
+      <h1 style="font-size: 2.5rem; font-weight: 800; margin: 12px 0 16px;">The Innovation Team &amp; Pilot Collaboration</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 900px;">
+        Developed at the AICTE Idea Lab, Ramdeobaba University, Nagpur. Combining disciplines in edge computing, high-frequency signal processing, embedded systems, and industrial AI for the Seva Innovation Challenge 2026.
       </p>
+    </div>
 
-      <table border="1" cellpadding="8" cellspacing="0" width="100%">
+    <!-- Team Members Table -->
+    <div class="styled-table-wrapper" style="margin-bottom: 48px;">
+      <table class="styled-table">
         <thead>
-          <tr bgcolor="#f0f0f0">
-            <th>Name</th>
-            <th>Designation / Functional Role</th>
-            <th>Primary Engineering Focus</th>
+          <tr>
+            <th style="width: 25%;">Student / Mentor Name</th>
+            <th style="width: 30%;">Engineering Role</th>
+            <th style="width: 45%;">Core Subsystem Ownership</th>
           </tr>
         </thead>
         <tbody>
           <tr>
-            <td><strong>Vaishnav Balpande</strong></td>
-            <td>Team Lead &amp; Systems Architect</td>
-            <td>Edge hardware integration (Raspberry Pi), Linux runtime, overall pipeline coordination</td>
+            <td><strong style="color: #fff; font-size: 1rem;">Vaishnav Balpande</strong></td>
+            <td><span class="badge-pill" style="border-color: var(--accent-cyan);">Team Lead &amp; Systems Architect</span></td>
+            <td>Edge hardware integration (Raspberry Pi 4), Linux runtime, overall pipeline synchronization, and REST/WebSocket APIs</td>
           </tr>
           <tr>
-            <td><strong>Shreyank Nipane</strong></td>
-            <td>Vibration &amp; Signal Processing Lead</td>
-            <td>20 kHz accelerometer sampling, time-domain feature engineering, IMS bearing baseline models</td>
+            <td><strong style="color: #fff; font-size: 1rem;">Shreyank Nipane</strong></td>
+            <td><span class="badge-pill">Vibration &amp; Signal Processing Lead</span></td>
+            <td>20 kHz accelerometer sampling, time-domain feature engineering (RMS, Kurtosis), and NASA IMS bearing baseline models</td>
           </tr>
           <tr>
-            <td><strong>Tanushri Sapate</strong></td>
-            <td>Acoustic Machine Learning Lead</td>
-            <td>16 kHz microphone ingestion, 61 psychoacoustic features, logistic regression outlier detection</td>
+            <td><strong style="color: #fff; font-size: 1rem;">Tanushri Sapate</strong></td>
+            <td><span class="badge-pill">Acoustic Machine Learning Lead</span></td>
+            <td>16 kHz microphone pipeline, 61 MFCC &amp; spectral octave features, and L2 logistic regression anomaly detection</td>
           </tr>
           <tr>
-            <td><strong>Aastha Pusdekar</strong></td>
-            <td>Thermal Computer Vision Lead</td>
-            <td>MLX90640 thermopile matrix processing, MobileNetV3-Small motor thermal hotspot classifier</td>
+            <td><strong style="color: #fff; font-size: 1rem;">Aastha Pusdekar</strong></td>
+            <td><span class="badge-pill">Thermal Computer Vision Lead</span></td>
+            <td>MLX90640 thermopile array matrix processing, spatial temperature gradient mapping, and MobileNetV3-Small motor hotspot classification</td>
           </tr>
           <tr>
-            <td><strong>Kartik Madankar</strong></td>
-            <td>Embedded Firmware &amp; UI Developer</td>
-            <td>FastAPI backend endpoints, WebSocket telemetry streaming, operator browser interface</td>
+            <td><strong style="color: #fff; font-size: 1rem;">Kartik Madankar</strong></td>
+            <td><span class="badge-pill">Firmware &amp; Operator Dashboard Lead</span></td>
+            <td>FastAPI backend endpoints, local SQLite telemetry storage, and operator browser interface</td>
           </tr>
-          <tr bgcolor="#f9f9f9">
-            <td><strong>Prof. Ashwini Lokhande</strong></td>
-            <td>Faculty Mentor &amp; Project Guide</td>
-            <td>Academic oversight, research methodology, lab facilities coordination, industry liaison</td>
+          <tr style="background: rgba(255, 255, 255, 0.04);">
+            <td><strong style="color: #fff; font-size: 1rem;">Prof. Ashwini Lokhande</strong></td>
+            <td><span class="badge-pill" style="border-color: var(--accent-green); color: var(--accent-green);">Faculty Mentor &amp; Guide</span></td>
+            <td>Academic oversight, research methodology, test rig facilities coordination, and industrial liaison</td>
           </tr>
         </tbody>
       </table>
-    </section>
+    </div>
 
-    <hr>
-
-    <!-- Support Sought -->
-    <section>
-      <h2>2. Support We Are Seeking from the Seva Innovation Challenge</h2>
-      <ul>
-        <li><strong>Pilot Deployment Site:</strong> Opportunity to mount initial 2&ndash;3 node trial kits in a municipal water pumping station (e.g. Nagpur Municipal Corporation), an MSRTC bus maintenance workshop, or a local MIDC manufacturing cluster.</li>
-        <li><strong>Grant Funding for Industrial Sensor Hardware:</strong> &#8377;65,000 to &#8377;1,20,000 for acquiring high-temperature industrial accelerometers, IP65 enclosures, and calibration equipment.</li>
-        <li><strong>Domain Mentorship:</strong> Guidance from senior mechanical reliability engineers and vibration analysts on field-tuning ISO 10816 vibration severity standards.</li>
-      </ul>
-    </section>
-
-    <hr>
-
-    <!-- Direct Contact Information -->
-    <section>
-      <h2>3. Direct Contact Information</h2>
-      <table border="1" cellpadding="6" cellspacing="0">
-        <tr>
-          <td><strong>Primary Contact:</strong></td>
-          <td>Vaishnav Balpande (Project Lead)</td>
-        </tr>
-        <tr>
-          <td><strong>Email:</strong></td>
-          <td><a href="mailto:amazondevvaish@gmail.com">amazondevvaish@gmail.com</a></td>
-        </tr>
-        <tr>
-          <td><strong>Institutional Email:</strong></td>
-          <td><a href="mailto:idealab@rknec.edu">idealab@rknec.edu</a></td>
-        </tr>
-        <tr>
-          <td><strong>Institution:</strong></td>
-          <td>Idea Lab, Ramdeobaba University (formerly RCOEM), Katol Road, Nagpur, Maharashtra &ndash; 440013</td>
-        </tr>
-        <tr>
-          <td><strong>GitHub Repository:</strong></td>
-          <td><a href="https://github.com/NodeNexus/YantraSetu" target="_blank">https://github.com/NodeNexus/YantraSetu</a></td>
-        </tr>
-      </table>
-    </section>
-
-    <hr>
-
-    <!-- Pilot & Collaboration Request Form -->
-    <section>
-      <h2>4. Request a Pilot / Express Collaboration Interest</h2>
-      <p>
-        If you represent an MSME manufacturing plant, PSU workshop, or municipal utility interested in testing an early YantraSetu monitoring node:
+    <!-- Downloads Strip -->
+    <div class="feature-card" style="margin-bottom: 48px; border-color: rgba(6, 182, 212, 0.3);">
+      <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 12px;">Official Project Artifacts &amp; Downloads</h3>
+      <p style="color: var(--text-muted); font-size: 0.9rem; margin-bottom: 16px;">
+        Access the original submission materials and technical research reports submitted to the Seva Innovation Challenge:
       </p>
+      <div style="display: flex; gap: 16px; flex-wrap: wrap;">
+        <a href="/assets/docs/pitch_deck.pdf" target="_blank" class="btn btn-secondary">
+          <span>&#128196;</span> Official Pitch Deck PDF (147 KB)
+        </a>
+        <a href="/assets/docs/idea_lab_report.pdf" target="_blank" class="btn btn-secondary">
+          <span>&#128203;</span> Idea Lab Research Report PDF (3.4 MB)
+        </a>
+        <a href="https://github.com/NodeNexus/YantraSetu" target="_blank" class="btn btn-secondary">
+          <span>&lt;/&gt;</span> GitHub Repository Source Code
+        </a>
+      </div>
+    </div>
 
-      <form action="/team" method="GET" onsubmit="alert('Thank you for expressing interest in YantraSetu! We will contact you shortly.'); return false;">
-        <table border="0" cellpadding="6" cellspacing="0">
-          <tr>
-            <td><label for="name"><strong>Your Name:</strong></label></td>
-            <td><input type="text" id="name" name="name" size="40" required placeholder="e.g. Rajesh Sharma"></td>
-          </tr>
-          <tr>
-            <td><label for="org"><strong>Organization / Workshop Name:</strong></label></td>
-            <td><input type="text" id="org" name="org" size="40" required placeholder="e.g. Sharma Precision Pumps, MIDC Hingna"></td>
-          </tr>
-          <tr>
-            <td><label for="email"><strong>Email Address:</strong></label></td>
-            <td><input type="email" id="email" name="email" size="40" required placeholder="e.g. rajesh@sharmapumps.com"></td>
-          </tr>
-          <tr>
-            <td><label for="phone"><strong>Phone / Mobile:</strong></label></td>
-            <td><input type="tel" id="phone" name="phone" size="40" placeholder="e.g. +91 98765 43210"></td>
-          </tr>
-          <tr>
-            <td><label for="machine"><strong>Critical Machine Types:</strong></label></td>
-            <td>
-              <select id="machine" name="machine">
-                <option value="induction-motor">Three-Phase Induction Motor</option>
-                <option value="centrifugal-pump">Centrifugal / Slurry Pump</option>
-                <option value="gearbox-conveyor">Gearbox / Conveyor Drive</option>
-                <option value="blower-fan">Industrial Air Blower / Fan</option>
-                <option value="other">Other Heavy Rotating Asset</option>
-              </select>
-            </td>
-          </tr>
-          <tr>
-            <td valign="top"><label for="message"><strong>Project Note / Questions:</strong></label></td>
-            <td>
-              <textarea id="message" name="message" rows="5" cols="42" placeholder="Tell us about the machine issues you face or pilot requirements..."></textarea>
-            </td>
-          </tr>
-          <tr>
-            <td></td>
-            <td><input type="submit" value="Submit Pilot Request"></td>
-          </tr>
-        </table>
-      </form>
-    </section>
+    <!-- Contact & Pilot Form Grid -->
+    <div class="grid-2">
+      <!-- Contact Details -->
+      <div class="feature-card">
+        <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 16px;">Institutional Address &amp; Contact</h3>
+        <ul style="list-style: none; font-size: 0.92rem; line-height: 2.2; color: var(--text-muted);">
+          <li>&#128100; <strong>Project Lead:</strong> Vaishnav Balpande</li>
+          <li>&#128231; <strong>Direct Email:</strong> <a href="mailto:amazondevvaish@gmail.com">amazondevvaish@gmail.com</a></li>
+          <li>&#127979; <strong>Idea Lab Email:</strong> <a href="mailto:idealab@rknec.edu">idealab@rknec.edu</a></li>
+          <li>&#128205; <strong>Campus Location:</strong> AICTE Idea Lab, Ramdeobaba University (formerly RCOEM), Katol Road, Nagpur, Maharashtra &ndash; 440013</li>
+          <li>&#127981; <strong>Target Pilot Clusters:</strong> MIDC Hingna, MIDC Butibori, Nagpur Municipal Corporation (NMC) Water Works, MSRTC Workshops</li>
+        </ul>
+      </div>
+
+      <!-- Pilot Request Form -->
+      <div class="feature-card">
+        <h3 style="font-size: 1.25rem; color: #fff; margin-bottom: 16px;">Express Interest in Hosting a Pilot Node</h3>
+        <form onsubmit="alert('Thank you for expressing interest in YantraSetu! Our team will contact you within 24 hours.'); return false;">
+          <div class="form-group">
+            <label class="form-label">Contact Person Name</label>
+            <input type="text" class="form-control" required placeholder="e.g. Rajesh Kumar">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Organization / Workshop / Plant Name</label>
+            <input type="text" class="form-control" required placeholder="e.g. Precision Components, MIDC Hingna">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Email Address</label>
+            <input type="email" class="form-control" required placeholder="e.g. rajesh@precisioneng.in">
+          </div>
+          <div class="form-group">
+            <label class="form-label">Critical Machine Asset for Monitoring</label>
+            <select class="form-control">
+              <option>Three-Phase Induction Motor (1–25 HP)</option>
+              <option>Centrifugal Water / Chemical Pump</option>
+              <option>Heavy Conveyor Gearbox / Drive</option>
+              <option>Industrial Air Blower / Compressor</option>
+              <option>Other Rotating Machine</option>
+            </select>
+          </div>
+          <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+            Submit Pilot Expression of Interest
+          </button>
+        </form>
+      </div>
+    </div>
 
   </main>
 
-  <hr>
-
-  <!-- Footer -->
-  <footer>
-    <p>
-      &copy; 2026 YantraSetu Innovation Initiative &bull; Idea Lab, Ramdeobaba University, Nagpur
-    </p>
-    <p>
-      <a href="/">&larr; Back to Overview</a> | <a href="https://github.com/NodeNexus/YantraSetu">GitHub Repository</a>
-    </p>
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <div>&copy; 2026 YantraSetu &bull; Idea Lab, Ramdeobaba University, Nagpur</div>
+      <div><a href="/">Home</a> &bull; <a href="/how-it-works">Architecture</a> &bull; <a href="/feasibility">BOM</a> &bull; <a href="/team">Team</a></div>
+    </div>
   </footer>
 
 </body>

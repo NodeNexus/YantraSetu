@@ -3,140 +3,165 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Live Demo - YantraSetu</title>
+  <title>Live Telemetry Feed - YantraSetu</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>YantraSetu: Live Telemetry &amp; Anomaly Simulator</h1>
-    <p><em>Simulating continuous edge telemetry streaming from a shop-floor induction motor</em></p>
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-group">
+        <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+          <div class="brand-logo-icon">&#9881;</div>
+          <div class="brand-text">
+            <h1>YANTRASETU</h1>
+            <span>AICTE Idea Lab &bull; Project 24CS03PR0504</span>
+          </div>
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a href="/">Overview</a>
+        <a href="/how-it-works">How It Works</a>
+        <a href="/live-demo" class="active">Live Telemetry</a>
+        <a href="/feasibility">BOM &amp; Feasibility</a>
+        <a href="/team">Team</a>
+        <a href="/#workbench" class="btn-header-cta">&bull; Test Interactive Console</a>
+      </nav>
+    </div>
   </header>
 
-  <hr>
+  <main class="container" style="padding: 48px 24px 80px;">
 
-  <!-- Navigation -->
-  <nav>
-    <p>
-      <strong>Navigation:</strong>
-      <a href="/">Overview</a> |
-      <a href="/how-it-works">How It Works & Architecture</a> |
-      <a href="/live-demo">Live Telemetry Demo</a> |
-      <a href="/feasibility">BOM Cost & Feasibility</a> |
-      <a href="/team">Team & Pilot Request</a>
-    </p>
-  </nav>
+    <div style="margin-bottom: 32px; display: flex; justify-content: space-between; align-items: flex-end; flex-wrap: wrap; gap: 16px;">
+      <div>
+        <div class="badge-pill">
+          <span class="live-dot"></span>
+          ACTIVE REST TELEMETRY FEED
+        </div>
+        <h1 style="font-size: 2.25rem; font-weight: 800; margin-top: 10px;">Continuous Machine Telemetry Stream</h1>
+        <p style="color: var(--text-muted); font-size: 1rem;">
+          Querying live edge telemetry endpoint: <code style="color: var(--accent-cyan); font-family: var(--font-mono);">/api/telemetry</code> (Updated every 2.5 seconds)
+        </p>
+      </div>
 
-  <hr>
+      <div style="text-align: right;">
+        <span style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Telemetry Heartbeat</span>
+        <div id="telemetry-time" style="font-family: var(--font-mono); font-size: 0.95rem; color: #fff;">Connecting...</div>
+      </div>
+    </div>
 
-  <main>
+    <!-- Machine Metadata Strip -->
+    <div class="feature-card" style="margin-bottom: 24px; padding: 20px;">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px;">
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Monitored Asset ID</div>
+          <div id="machine-id" style="font-size: 1.15rem; font-weight: 700; color: #fff; font-family: var(--font-mono);">MTR-IND-04</div>
+        </div>
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Machine Specification</div>
+          <div id="machine-type" style="font-size: 0.95rem; color: var(--text-muted);">5 HP Three-Phase Induction Motor</div>
+        </div>
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Network State</div>
+          <div style="font-size: 0.95rem; font-weight: 600; color: var(--accent-green);">&#10003; Local WebSocket / REST Online</div>
+        </div>
+        <div>
+          <div style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Operational Health</div>
+          <div id="system-status" style="font-size: 1.15rem; font-weight: 700; color: var(--accent-green);">HEALTHY / NORMAL</div>
+        </div>
+      </div>
+    </div>
 
-    <!-- Operational State Banner -->
-    <section>
-      <h2>1. Target Machine State</h2>
-      <table border="1" cellpadding="6" cellspacing="0">
-        <tr>
-          <td><strong>Machine ID:</strong></td>
-          <td><span id="machine-id">MTR-IND-04</span></td>
-          <td><strong>Asset Type:</strong></td>
-          <td><span id="machine-type">Three-Phase Induction Motor (5 HP, 1440 RPM)</span></td>
-        </tr>
-        <tr>
-          <td><strong>Connection Mode:</strong></td>
-          <td><strong style="color: green;">LIVE WEBSOCKET / REST FEED</strong></td>
-          <td><strong>System Health:</strong></td>
-          <td><span id="system-status"><strong>HEALTHY / NORMAL</strong></span></td>
-        </tr>
-        <tr>
-          <td><strong>Last Updated:</strong></td>
-          <td colspan="3"><span id="telemetry-time">Connecting...</span></td>
-        </tr>
-      </table>
-    </section>
+    <!-- Live Sensor Cards Grid -->
+    <div class="grid-3" style="margin-bottom: 32px;">
+      <!-- Thermal Card -->
+      <div class="feature-card" style="border-top: 3px solid #ef4444;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h3 style="font-size: 1.1rem; color: #fff;">&#128293; Infrared Thermography</h3>
+          <span id="therm-status" class="tag tag-normal">NORMAL</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 16px;">Sensor: Melexis MLX90640 (32&times;24 IR Array)</p>
+        
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #090e18; padding: 12px 16px; border-radius: 8px; margin-bottom: 8px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Mean Casing Temp</span>
+          <span style="font-size: 1.25rem; font-weight: 700; font-family: var(--font-mono); color: #fff;"><span id="therm-mean">--</span> &deg;C</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #090e18; padding: 12px 16px; border-radius: 8px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Maximum Hotspot</span>
+          <span style="font-size: 1.25rem; font-weight: 700; font-family: var(--font-mono); color: #38bdf8;"><span id="therm-max">--</span> &deg;C</span>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 12px;">Thermal Trip Threshold: 75.0 &deg;C (Max Casing)</div>
+      </div>
 
-    <br>
+      <!-- Vibration Card -->
+      <div class="feature-card" style="border-top: 3px solid #f59e0b;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h3 style="font-size: 1.1rem; color: #fff;">&#128266; Vibration Dynamics</h3>
+          <span id="vib-status" class="tag tag-normal">NORMAL</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 16px;">Sensor: 20 kHz Accelerometer (Drive End Bearing)</p>
 
-    <!-- Live Multi-Sensor Telemetry Table -->
-    <section>
-      <h2>2. Live Modality Telemetry Feed</h2>
-      <p>
-        <em>Note: This data is streamed dynamically from the <code>/api/telemetry</code> endpoint on this web service.</em>
-      </p>
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #090e18; padding: 12px 16px; border-radius: 8px; margin-bottom: 8px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">RMS Velocity</span>
+          <span style="font-size: 1.25rem; font-weight: 700; font-family: var(--font-mono); color: #fff;"><span id="vib-rms">--</span> g</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #090e18; padding: 12px 16px; border-radius: 8px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Kurtosis (Peak Blows)</span>
+          <span style="font-size: 1.25rem; font-weight: 700; font-family: var(--font-mono); color: #38bdf8;"><span id="vib-kurtosis">--</span></span>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 12px;">ISO 10816 Zone A Limit: &lt; 0.600 g RMS</div>
+      </div>
 
-      <table border="1" cellpadding="8" cellspacing="0" width="100%">
+      <!-- Acoustic Card -->
+      <div class="feature-card" style="border-top: 3px solid #06b6d4;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h3 style="font-size: 1.1rem; color: #fff;">&#127911; Acoustic Noise</h3>
+          <span id="snd-status" class="tag tag-normal">NORMAL</span>
+        </div>
+        <p style="font-size: 0.8rem; color: var(--text-dim); margin-bottom: 16px;">Sensor: Directional MEMS Microphone (16 kHz PCM)</p>
+
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #090e18; padding: 12px 16px; border-radius: 8px; margin-bottom: 8px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Sound Level</span>
+          <span style="font-size: 1.25rem; font-weight: 700; font-family: var(--font-mono); color: #fff;"><span id="snd-db">--</span> dB</span>
+        </div>
+        <div style="display: flex; justify-content: space-between; align-items: center; background: #090e18; padding: 12px 16px; border-radius: 8px;">
+          <span style="font-size: 0.85rem; color: var(--text-muted);">Anomaly Probability</span>
+          <span style="font-size: 1.25rem; font-weight: 700; font-family: var(--font-mono); color: #38bdf8;"><span id="snd-score">--</span></span>
+        </div>
+        <div style="font-size: 0.75rem; color: var(--text-dim); margin-top: 12px;">Fault Probability Threshold: &gt; 0.400</div>
+      </div>
+    </div>
+
+    <!-- Confidence Gate Summary Card -->
+    <div class="feature-card" style="margin-bottom: 32px; border: 1px solid rgba(6, 182, 212, 0.4);">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+        <div>
+          <span style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Confidence Gate Status</span>
+          <div style="font-size: 1.2rem; font-weight: 700; color: #fff; margin-top: 2px;">
+            &#10003; <span id="gate-pass">PASSED &mdash; Validated Normal Operation</span>
+          </div>
+        </div>
+        <div>
+          <span style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Confidence Score</span>
+          <div id="gate-conf" style="font-size: 1.2rem; font-weight: 800; font-family: var(--font-mono); color: var(--accent-green); margin-top: 2px;">
+            HIGH (96.4%)
+          </div>
+        </div>
+        <div>
+          <span style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">False Alarm Filter</span>
+          <div id="gate-suppressed" style="font-size: 0.9rem; color: var(--text-muted); margin-top: 2px;">
+            14 transient spikes filtered today
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Audit Log -->
+    <div class="styled-table-wrapper">
+      <table class="styled-table">
         <thead>
-          <tr bgcolor="#f0f0f0">
-            <th>Modality</th>
-            <th>Primary Sensor</th>
-            <th>Live Metric Readings</th>
-            <th>Safety Threshold</th>
-            <th>Status</th>
-          </tr>
-        </thead>
-        <tbody>
           <tr>
-            <td><strong>Thermal (Heat)</strong></td>
-            <td>MLX90640 Far-Infrared Array</td>
-            <td>
-              Mean Temp: <strong><span id="therm-mean">--</span> &deg;C</strong><br>
-              Peak Hotspot: <strong><span id="therm-max">--</span> &deg;C</strong>
-            </td>
-            <td>75.0 &deg;C (Max Hotspot)</td>
-            <td><span id="therm-status"><strong>NORMAL</strong></span></td>
-          </tr>
-          <tr>
-            <td><strong>Vibration (Dynamics)</strong></td>
-            <td>High-kHz Accelerometer (Drive End)</td>
-            <td>
-              RMS Velocity: <strong><span id="vib-rms">--</span> g</strong><br>
-              Kurtosis: <strong><span id="vib-kurtosis">--</span></strong> (ISO 10816 baseline: &lt;3.5)
-            </td>
-            <td>0.600 g (RMS Alert)</td>
-            <td><span id="vib-status"><strong>NORMAL</strong></span></td>
-          </tr>
-          <tr>
-            <td><strong>Acoustic (Sound)</strong></td>
-            <td>Directional MEMS Microphone (16 kHz)</td>
-            <td>
-              Sound Level: <strong><span id="snd-db">--</span> dB</strong><br>
-              Anomaly Score: <strong><span id="snd-score">--</span></strong>
-            </td>
-            <td>Score &gt; 0.400 (Fault Probability)</td>
-            <td><span id="snd-status"><strong>NORMAL</strong></span></td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
-
-    <br>
-
-    <!-- Confidence Gate Summary -->
-    <section>
-      <h2>3. Layered Confidence Gate Status</h2>
-      <table border="1" cellpadding="6" cellspacing="0">
-        <tr>
-          <td><strong>Gate Assessment:</strong></td>
-          <td><span id="gate-pass">PASSED - Signal Validated</span></td>
-        </tr>
-        <tr>
-          <td><strong>Confidence Level:</strong></td>
-          <td><span id="gate-conf">HIGH (96.4%)</span></td>
-        </tr>
-        <tr>
-          <td><strong>Suppressed Spurious Alarms:</strong></td>
-          <td><span id="gate-suppressed">14 transient spikes filtered today</span></td>
-        </tr>
-      </table>
-    </section>
-
-    <br>
-
-    <!-- Simulated Event Log -->
-    <section>
-      <h2>4. Recent Machine Anomaly &amp; Audit Log</h2>
-      <table border="1" cellpadding="6" cellspacing="0" width="100%">
-        <thead>
-          <tr bgcolor="#f0f0f0">
             <th>Timestamp</th>
             <th>Modality</th>
             <th>Severity</th>
@@ -148,40 +173,41 @@
           <tr>
             <td>Today, 08:14:22</td>
             <td>Vibration</td>
-            <td>INFO</td>
+            <td><span class="tag tag-normal">INFO</span></td>
             <td>Baseline calibration completed across 1,000 continuous revolutions.</td>
             <td>None (Operational baseline locked).</td>
           </tr>
           <tr>
             <td>Today, 09:30:15</td>
             <td>Thermal</td>
-            <td>NOTICE</td>
+            <td><span class="tag tag-normal">NOTICE</span></td>
             <td>Ambient room temperature rise to 38.2 &deg;C. Threshold dynamically offset +3 &deg;C.</td>
             <td>Automatic calibration adjusted.</td>
           </tr>
           <tr>
             <td>Today, 11:42:08</td>
             <td>Acoustic</td>
-            <td>WARNING (FILTERED)</td>
+            <td><span class="tag tag-warning">FILTERED</span></td>
             <td>Transient audio peak (88 dB) detected; suppressed by Confidence Gate (duration &lt; 200 ms).</td>
             <td>Filtered as external shop impact noise.</td>
           </tr>
           <tr>
             <td>Today, 14:05:40</td>
             <td>System</td>
-            <td>NORMAL</td>
+            <td><span class="tag tag-normal">NORMAL</span></td>
             <td>Edge system memory check: 1.2 GB / 4.0 GB utilized on Raspberry Pi 4.</td>
             <td>System healthy.</td>
           </tr>
         </tbody>
       </table>
-    </section>
+    </div>
+
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="/#workbench" class="btn btn-primary">&bull; Switch to Full Interactive Workbench</a>
+    </div>
 
   </main>
 
-  <hr>
-
-  <!-- Live Updating Script -->
   <script>
     async function updateTelemetry() {
       try {
@@ -189,7 +215,7 @@
         if (!res.ok) throw new Error('Network error');
         const data = await res.json();
 
-        document.getElementById('telemetry-time').innerText = new Date(data.timestamp).toLocaleString();
+        document.getElementById('telemetry-time').innerText = new Date(data.timestamp).toLocaleTimeString();
         document.getElementById('machine-id').innerText = data.machine_id;
         document.getElementById('machine-type').innerText = data.machine_type;
         document.getElementById('system-status').innerText = data.operational_status;
@@ -206,30 +232,25 @@
 
         // Acoustic
         document.getElementById('snd-db').innerText = data.modalities.acoustic.sound_level_db;
-        document.getElementById('snd-score').innerText = data.modalities.acoustic.anomaly_probability;
+        document.getElementById('snd-score').innerText = (data.modalities.acoustic.anomaly_probability * 100).toFixed(1) + '%';
         document.getElementById('snd-status').innerText = data.modalities.acoustic.status;
 
         // Gate
         document.getElementById('gate-conf').innerText = data.confidence_gate.confidence_level;
         document.getElementById('gate-suppressed').innerText = data.confidence_gate.suppressed_false_alarms + ' transient spikes filtered today';
       } catch (err) {
-        document.getElementById('telemetry-time').innerText = 'Reconnecting to telemetry feed... (' + err.message + ')';
+        document.getElementById('telemetry-time').innerText = 'Reconnecting...';
       }
     }
-
-    // Initial load and periodic refresh every 2.5 seconds
     updateTelemetry();
     setInterval(updateTelemetry, 2500);
   </script>
 
-  <!-- Footer -->
-  <footer>
-    <p>
-      &copy; 2026 YantraSetu Innovation Initiative &bull; Idea Lab, Ramdeobaba University, Nagpur
-    </p>
-    <p>
-      <a href="/how-it-works">&larr; How It Works</a> | <a href="/feasibility">Proceed to Feasibility &amp; BOM &rarr;</a>
-    </p>
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <div>&copy; 2026 YantraSetu &bull; Idea Lab, Ramdeobaba University, Nagpur</div>
+      <div><a href="/">Home</a> &bull; <a href="/how-it-works">Architecture</a> &bull; <a href="/feasibility">BOM</a> &bull; <a href="/team">Team</a></div>
+    </div>
   </footer>
 
 </body>

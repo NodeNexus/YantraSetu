@@ -3,174 +3,714 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YantraSetu - Multimodal Machine Health Monitoring</title>
+  <title>YantraSetu - Multimodal Machine Health &amp; Anomaly Intelligence for Indian MSMEs</title>
+  <meta name="description" content="AICTE Idea Lab Project 24CS03PR0504: Tri-modal (Thermal, Vibration, Acoustic) edge condition monitoring with false-alarm confidence gating.">
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>YantraSetu (यंत्रसेतु)</h1>
-    <p><strong>Multimodal Machine Health Monitoring & Early Anomaly Detection for Industrial MSMEs</strong></p>
-    <p><em>Idea Lab, Ramdeobaba University, Nagpur &bull; Project Code: 24CS03PR0504</em></p>
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-group">
+        <div class="brand-logo-icon">&#9881;</div>
+        <div class="brand-text">
+          <h1>YANTRASETU</h1>
+          <span>AICTE Idea Lab &bull; Project 24CS03PR0504</span>
+        </div>
+      </div>
+      <nav class="main-nav">
+        <a href="#workbench">Live Workbench</a>
+        <a href="#innovation">Tri-Modal Innovation</a>
+        <a href="#prototype">Prototype Evidence</a>
+        <a href="#benchmarks">Validation Benchmarks</a>
+        <a href="#bom">Hardware BOM</a>
+        <a href="#pilot">Pilot Roadmap</a>
+        <a href="#team">Team</a>
+        <a href="#workbench" class="btn-header-cta">&bull; Test Interactive Console</a>
+      </nav>
+    </div>
   </header>
 
-  <hr>
+  <!-- Hero Section -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="hero-grid">
+        <div class="hero-content">
+          <div class="badge-pill">
+            <span class="live-dot"></span>
+            SEVA INNOVATION CHALLENGE 2026 &bull; RAMDEOBABA UNIVERSITY, NAGPUR
+          </div>
+          <h2 class="hero-title">
+            Edge-Native <span class="hero-highlight">Tri-Modal Machine Health</span> Intelligence for Indian MSMEs
+          </h2>
+          <p class="hero-description">
+            A low-cost edge system that watches a machine’s <strong>thermal gradient</strong>, <strong>vibration dynamics (20 kHz)</strong>, and <strong>acoustic noise</strong> simultaneously. Fuses signals through a <strong>Layered Confidence Gate</strong> to eliminate false alarm fatigue and predict rotating machinery failure <em>before</em> catastrophic shop-floor downtime occurs.
+          </p>
+          <div class="hero-actions">
+            <a href="#workbench" class="btn btn-primary">
+              <span>&#9654;</span> Launch Interactive Judge Workbench
+            </a>
+            <a href="/assets/docs/pitch_deck.pdf" target="_blank" class="btn btn-secondary">
+              <span>&#128196;</span> Download Official Pitch Deck (PDF)
+            </a>
+            <a href="https://github.com/NodeNexus/YantraSetu" target="_blank" class="btn btn-secondary">
+              <span>&lt;/&gt;</span> GitHub Repository
+            </a>
+          </div>
+        </div>
 
-  <!-- Navigation -->
-  <nav>
-    <p>
-      <strong>Navigation:</strong>
-      <a href="/">Overview</a> |
-      <a href="/how-it-works">How It Works & Architecture</a> |
-      <a href="/live-demo">Live Telemetry Demo</a> |
-      <a href="/feasibility">BOM Cost & Feasibility</a> |
-      <a href="/team">Team & Pilot Request</a>
-    </p>
-  </nav>
+        <!-- Hero Card / Quick Specs -->
+        <div class="hero-card">
+          <div class="feature-card" style="border: 1px solid rgba(6, 182, 212, 0.4); box-shadow: 0 0 30px var(--glow-cyan);">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+              <span class="badge-pill" style="border-color: var(--accent-green); color: var(--accent-green);">SYSTEM SPECIFICATION</span>
+              <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-dim);">REV 2026.10</span>
+            </div>
+            <h3 style="font-size: 1.15rem; margin-bottom: 12px;">Three-Phase Induction Motor Monitor</h3>
+            <ul style="list-style: none; font-size: 0.88rem; color: var(--text-muted); line-height: 1.8;">
+              <li>&#10003; <strong>Thermal Camera:</strong> MLX90640 Far-IR (32&times;24 Thermopile Array)</li>
+              <li>&#10003; <strong>Vibration Sensor:</strong> 20 kHz Accelerometer (Time-domain RMS &amp; Kurtosis)</li>
+              <li>&#10003; <strong>Acoustic Channel:</strong> 16 kHz Directional MEMS (61 MFCCs &amp; Octave Bands)</li>
+              <li>&#10003; <strong>Edge Computer:</strong> Raspberry Pi 4 Model B (4 GB RAM, No Cloud Required)</li>
+              <li>&#10003; <strong>False-Alarm Gate:</strong> Multi-Window Temporal Persistence Filter</li>
+              <li>&#10003; <strong>Total Hardware BOM:</strong> &#8377;19,500 &ndash; &#8377;22,400 per machine node</li>
+            </ul>
+          </div>
+        </div>
+      </div>
 
-  <hr>
+      <!-- Stats Ribbon -->
+      <div class="stats-ribbon">
+        <div class="stat-card">
+          <div class="stat-value">97.6%</div>
+          <div class="stat-label">Acoustic Anomaly Recall</div>
+          <div class="stat-sub">537 held-out machine sound clips (Macro-F1: 0.88)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">96.1%</div>
+          <div class="stat-label">Thermal Top-3 Accuracy</div>
+          <div class="stat-sub">MobileNetV3 across 6 distinct motor thermal states</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">&#8377;21,000</div>
+          <div class="stat-label">Complete Hardware BOM</div>
+          <div class="stat-sub">Edge Pi 4 + 3 Sensors + IP65 Enclosure (vs. &#8377;5L+ SCADA)</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-value">&lt; 2 Months</div>
+          <div class="stat-label">Estimated MSME Payback</div>
+          <div class="stat-sub">1 avoided motor burnout covers the complete kit cost</div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <!-- Main Content -->
-  <main>
+  <!-- INTERACTIVE JUDGE WORKBENCH (The Main Showcase) -->
+  <section id="workbench" class="section-block" style="background: #060910;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Interactive Evaluation Console</span>
+        <h2 class="section-title">Test the Digital Twin &amp; Anomaly Engine Live</h2>
+        <p class="section-subtitle">
+          Select operating scenarios below to simulate how YantraSetu ingests high-frequency vibration, infrared thermography, and acoustic signals in real time, and watch the <strong>Layered Confidence Gate</strong> filter false alarms.
+        </p>
+      </div>
 
-    <!-- Executive Summary -->
-    <section>
-      <h2>1. Executive Summary</h2>
-      <p>
-        <strong>YantraSetu</strong> is an affordable, edge-computing condition monitoring system designed specifically for micro, small, and medium manufacturing enterprises (MSMEs). By continuously observing a rotating machine’s <strong>thermal emission (infrared)</strong>, <strong>vibration dynamics</strong>, and <strong>acoustic noise (sound)</strong>, YantraSetu identifies early warning signs of component degradation (bearing flaking, shaft misalignment, unbalance, stator overheating) long before catastrophic mechanical failure occurs.
-      </p>
-      <blockquote>
-        "Transitioning industrial maintenance from reactive emergency fire-fighting to proactive planned repair—without requiring lakhs in proprietary SCADA investments."
-      </blockquote>
-    </section>
+      <div class="workbench-container">
+        <!-- Workbench Controls -->
+        <div class="workbench-topbar">
+          <div class="workbench-title-group">
+            <span class="live-dot"></span>
+            <strong>Target Machine:</strong>
+            <span style="font-family: var(--font-mono); color: var(--accent-cyan);">MTR-IND-04 (5 HP Induction Motor &bull; 1440 RPM)</span>
+            <span id="wb-badge" class="tag tag-normal">NORMAL</span>
+          </div>
 
-    <hr>
+          <div class="workbench-controls">
+            <span style="font-size: 0.8rem; color: var(--text-dim); margin-right: 4px;">Inject Scenario:</span>
+            <button class="scenario-btn active" data-scenario="healthy">1. Healthy Baseline</button>
+            <button class="scenario-btn" data-scenario="bearing">2. Bearing Outer-Race Flaking</button>
+            <button class="scenario-btn" data-scenario="thermal">3. Lubrication Breakdown</button>
+            <button class="scenario-btn" data-scenario="cavitation">4. Pump Cavitation</button>
+            <button class="scenario-btn" data-scenario="false_alarm">5. False Alarm Test</button>
+          </div>
+        </div>
 
-    <!-- The Problem -->
-    <section>
-      <h2>2. The Problem in Indian Manufacturing</h2>
-      <p>
-        Rotating machinery—including electric motors, centrifugal pumps, conveyor gearboxes, and industrial blowers—forms the core of manufacturing operations across India's industrial belts (such as MIDC Hingna and Butibori in Vidarbha, Maharashtra).
-      </p>
-      <ul>
-        <li><strong>Sudden Unplanned Breakdowns:</strong> Critical machines fail without warning, halting production lines, causing worker safety risks, and costing small units tens of thousands of rupees per downtime incident.</li>
-        <li><strong>Inadequate Manual Audits:</strong> Today, small plants rely on periodic manual rounds where a technician feels a motor with a palm or uses an isolated vibration pen once a month. Nascent defects are routinely missed.</li>
-        <li><strong>Prohibitive Commercial Costs:</strong> Imported commercial condition monitoring systems cost between ₹3,00,000 and ₹15,00,000 per installation and demand dedicated vibration vibration analysts to interpret complex FFT spectra.</li>
-      </ul>
-    </section>
+        <!-- Scenario Banner -->
+        <div style="background: rgba(255, 255, 255, 0.02); padding: 12px 24px; border-bottom: 1px solid var(--border-subtle); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+          <div>
+            <strong id="wb-scenario-name" style="color: #fff; font-size: 0.95rem;">Scenario 1: Baseline Healthy Motor</strong>
+            <span id="wb-desc" style="display: block; font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
+              Motor running within normal ISO 10816-3 Class 1 limits. Symmetrical heat distribution and harmonic vibration.
+            </span>
+          </div>
+          <div style="text-align: right;">
+            <span style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Machine Health Index</span>
+            <div id="wb-health-score" style="font-size: 1.5rem; font-weight: 800; font-family: var(--font-mono); color: var(--accent-green); line-height: 1;">98%</div>
+          </div>
+        </div>
 
-    <hr>
+        <!-- Workbench Body: 3 Canvases & Metric Displays -->
+        <div class="workbench-body">
 
-    <!-- The YantraSetu Solution -->
-    <section>
-      <h2>3. The YantraSetu Solution</h2>
-      <p>
-        YantraSetu bridges the gap between manual guesswork and high-cost industrial IoT. It packages tri-modal sensing onto an inexpensive edge computer (Raspberry Pi 4) that operates directly on the factory floor without requiring expensive recurring cloud subscriptions.
-      </p>
+          <!-- Left Column: Vibration Oscilloscope & Thermal Matrix -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Vibration Feed -->
+            <div class="feed-box">
+              <div class="feed-header">
+                <span>&#128266; Vibration Dynamics (20 kHz Accelerometer)</span>
+                <span class="tag tag-normal">TIME-DOMAIN &amp; HARMONICS</span>
+              </div>
+              <canvas id="canvas-vibration" width="540" height="150" style="width: 100%; height: 150px; border-radius: 6px; display: block; background: #050912;"></canvas>
+              <div style="display: flex; justify-content: space-between; margin-top: 10px; font-family: var(--font-mono); font-size: 0.8rem;">
+                <div>RMS Velocity: <strong id="wb-vib-rms" style="color: #fff;">0.285 g</strong></div>
+                <div>Kurtosis (Impulsiveness): <strong id="wb-vib-kurt" style="color: #fff;">2.92</strong></div>
+                <div>ISO 10816: <strong style="color: var(--accent-green);">Zone A (Good)</strong></div>
+              </div>
+            </div>
 
-      <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-          <tr>
-            <th>Parameter</th>
-            <th>Traditional Approach</th>
-            <th>YantraSetu Edge System</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><strong>Sensing Modalities</strong></td>
-            <td>Single signal (often spot vibration or periodic IR gun)</td>
-            <td><strong>Tri-Modal:</strong> Thermal Video + High-kHz Vibration + Acoustic Sound</td>
-          </tr>
-          <tr>
-            <td><strong>Hardware Cost</strong></td>
-            <td>₹3,00,000 to ₹10,00,000+</td>
-            <td><strong>₹18,500 – ₹22,000</strong> (Complete edge node + sensors)</td>
-          </tr>
-          <tr>
-            <td><strong>Monitoring Frequency</strong></td>
-            <td>Periodic / Monthly manual surveys</td>
-            <td><strong>Continuous (24x7)</strong>, second-by-second evaluation</td>
-          </tr>
-          <tr>
-            <td><strong>Ease of Use</strong></td>
-            <td>Requires certified vibration analyst to read FFT spectra</td>
-            <td><strong>Plain-English Status:</strong> Healthy, Warning, or Critical in web browser</td>
-          </tr>
-          <tr>
-            <td><strong>Cloud Dependency</strong></td>
-            <td>Mandatory cloud upload and recurring monthly SaaS license</td>
-            <td><strong>Zero Cloud Dependency:</strong> Local network dashboard with edge inference</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+            <!-- Thermal Infrared Feed -->
+            <div class="feed-box">
+              <div class="feed-header">
+                <span>&#128293; Infrared Thermal Matrix (32&times;24 Thermopile Array)</span>
+                <span class="tag tag-normal">SPATIAL HEAT DISTRIBUTION</span>
+              </div>
+              <canvas id="canvas-thermal" width="540" height="150" style="width: 100%; height: 150px; border-radius: 6px; display: block; background: #050912;"></canvas>
+              <div style="display: flex; justify-content: space-between; margin-top: 10px; font-family: var(--font-mono); font-size: 0.8rem;">
+                <div>Mean Casing Temp: <strong id="wb-temp-mean" style="color: #fff;">42.5 &deg;C</strong></div>
+                <div>Peak Hotspot: <strong id="wb-temp-max" style="color: #fff;">49.2 &deg;C</strong></div>
+                <div>Thermal Gradient: <strong style="color: var(--accent-green);">&lt; 10 &deg;C Rise</strong></div>
+              </div>
+            </div>
+          </div>
 
-    <hr>
+          <!-- Right Column: Acoustic Spectrum & Confidence Gate -->
+          <div style="display: flex; flex-direction: column; gap: 20px;">
+            <!-- Acoustic Feed -->
+            <div class="feed-box">
+              <div class="feed-header">
+                <span>&#127911; Acoustic Noise Spectrum (16 kHz MEMS)</span>
+                <span class="tag tag-normal">61 PSYCHOACOUSTIC MFCCs</span>
+              </div>
+              <canvas id="canvas-acoustic" width="540" height="150" style="width: 100%; height: 150px; border-radius: 6px; display: block; background: #050912;"></canvas>
+              <div style="display: flex; justify-content: space-between; margin-top: 10px; font-family: var(--font-mono); font-size: 0.8rem;">
+                <div>Sound Level: <strong id="wb-snd-db" style="color: #fff;">68.4 dB</strong></div>
+                <div>Anomaly Score: <strong id="wb-snd-score" style="color: #fff;">3.2%</strong></div>
+                <div>Background Filter: <strong style="color: var(--accent-green);">Active</strong></div>
+              </div>
+            </div>
 
-    <!-- Key Metrics & Achievements -->
-    <section>
-      <h2>4. Key Validation Metrics</h2>
-      <table border="1" cellpadding="8" cellspacing="0">
-        <thead>
-          <tr>
-            <th>Validated Domain</th>
-            <th>Benchmark Metric</th>
-            <th>Dataset / Source</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>Acoustic Machine Anomaly Detection</td>
-            <td><strong>97.6% Recall</strong> (Macro-F1: 0.88) on 537 held-out test clips</td>
-            <td>Industrial Machine Sound Dataset (MIMII / DCASE)</td>
-          </tr>
-          <tr>
-            <td>Thermal Hotspot Classification</td>
-            <td><strong>96.1% Top-3 Accuracy</strong> across 6 motor thermal fault classes</td>
-            <td>Induction Motor Thermography Benchmark</td>
-          </tr>
-          <tr>
-            <td>Vibration Run-to-Failure Analysis</td>
-            <td>Continuous RMS tracking & kurtosis anomaly detection</td>
-            <td>NASA IMS Bearing Run-to-Failure Dataset (20 kHz)</td>
-          </tr>
-          <tr>
-            <td>Edge Software Robustness</td>
-            <td><strong>199 automated unit & integration tests passing</strong></td>
-            <td>Local pytest continuous validation suite</td>
-          </tr>
-        </tbody>
-      </table>
-    </section>
+            <!-- Layered Confidence Gate Box -->
+            <div class="feed-box" style="border: 1px solid rgba(6, 182, 212, 0.4); background: #0b1322;">
+              <div class="feed-header" style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 8px;">
+                <span>&#128737; Layered Confidence Gate &amp; Diagnostic Action</span>
+                <span class="tag tag-normal" style="border: 1px solid var(--accent-cyan);">EDGE FILTER</span>
+              </div>
+              <div style="margin: 12px 0;">
+                <div style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Confidence Gate Decision:</div>
+                <div id="wb-gate-status" style="font-size: 1rem; font-weight: 700; color: #fff; font-family: var(--font-mono); margin-top: 2px;">
+                  PASSED (Normal Operation)
+                </div>
+              </div>
+              <div style="margin-bottom: 12px;">
+                <div style="font-size: 0.75rem; color: var(--text-dim); text-transform: uppercase;">Recommended Operator Action:</div>
+                <div id="wb-gate-action" style="font-size: 0.88rem; color: var(--text-muted); margin-top: 2px;">
+                  Continue standard continuous monitoring.
+                </div>
+              </div>
+              <div style="background: rgba(255, 255, 255, 0.03); padding: 8px 12px; border-radius: 6px; font-size: 0.78rem; color: var(--text-dim);">
+                <em>Why this matters to judges:</em> When a dropped wrench or temporary ambient heat spike occurs, the gate prevents spurious production stops. Try <strong>Scenario 5</strong> above to see it in action.
+              </div>
+            </div>
+          </div>
 
-    <hr>
+        </div>
 
-    <!-- Quick Action Links -->
-    <section>
-      <h2>5. Explore Further</h2>
-      <ul>
-        <li><a href="/how-it-works"><strong>Read Technical Architecture & Pipeline</strong></a> &mdash; Learn how tri-modal inputs pass through our confidence gate.</li>
-        <li><a href="/live-demo"><strong>View Live Telemetry Simulation</strong></a> &mdash; Inspect simulated real-time data streaming from a running induction motor.</li>
-        <li><a href="/feasibility"><strong>Inspect Bill of Materials (BOM) & Pilot Roadmap</strong></a> &mdash; Review hardware pricing and the 3-6-12 month rollout plan.</li>
-        <li><a href="/team"><strong>Contact Team & Request an MSME Pilot</strong></a> &mdash; Reach out for technical collaboration or field trial hosting.</li>
-      </ul>
-    </section>
+        <!-- Diagnostic Event Stream -->
+        <div style="background: #070b14; border-top: 1px solid var(--border-subtle); padding: 20px 24px;">
+          <h4 style="font-size: 0.85rem; color: var(--text-muted); text-transform: uppercase; margin-bottom: 12px;">Live Diagnostic Audit Stream (Rolling Telemetry History)</h4>
+          <div class="styled-table-wrapper" style="border-radius: 8px;">
+            <table class="styled-table" style="font-size: 0.82rem;">
+              <thead>
+                <tr>
+                  <th style="width: 15%;">Timestamp</th>
+                  <th style="width: 12%;">Severity</th>
+                  <th style="width: 43%;">Diagnostic Event Summary</th>
+                  <th style="width: 30%;">Operational Status</th>
+                </tr>
+              </thead>
+              <tbody id="wb-log-tbody">
+                <tr>
+                  <td>System Boot</td>
+                  <td><span class="tag tag-normal">NORMAL</span></td>
+                  <td><strong>Scenario 1: Baseline Healthy Motor</strong> &mdash; PASSED (Normal Operation)</td>
+                  <td>Continue standard continuous monitoring.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
 
-  </main>
+      </div>
+    </div>
+  </section>
 
-  <hr>
+  <!-- PROTOTYPE EVIDENCE SECTION -->
+  <section id="prototype" class="section-block">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Working Prototype Evidence</span>
+        <h2 class="section-title">The Operational Dashboard in Action</h2>
+        <p class="section-subtitle">
+          Snapshot of the running YantraSetu dashboard streaming continuous vibration, acoustic, and thermography telemetry through calibrated machine models on the Raspberry Pi 4 edge computer.
+        </p>
+      </div>
 
-  <!-- Footer -->
-  <footer>
-    <p>
-      &copy; 2026 YantraSetu Innovation Initiative &bull; Idea Lab, Ramdeobaba University, Nagpur &bull;
-      Designed for Seva Innovation Challenge 2026.
-    </p>
-    <p>
-      Deployed as a live web service on Render.
-    </p>
+      <div style="background: var(--bg-card); border: 1px solid var(--border-subtle); border-radius: 16px; padding: 24px; box-shadow: 0 12px 40px rgba(0,0,0,0.5);">
+        <img src="/assets/images/dashboard_prototype.png" alt="YantraSetu Live Prototype Dashboard" style="width: 100%; height: auto; border-radius: 8px; border: 1px solid var(--border-subtle); display: block;">
+        
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--border-subtle);">
+          <div>
+            <h4 style="font-size: 0.95rem; color: #fff; margin-bottom: 6px;">&#10003; Real-Time Modality Replay</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Synchronized ingestion of thermal frames, 20 kHz vibration time-series, and 16 kHz audio clips passing through edge feature extractors.</p>
+          </div>
+          <div>
+            <h4 style="font-size: 0.95rem; color: #fff; margin-bottom: 6px;">&#10003; Plain-Language Operator UI</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Translates raw, cryptic FFT spectra into clear status chips: <em>Healthy</em>, <em>Investigating (Unconfirmed)</em>, <em>Warning</em>, and <em>Critical</em>.</p>
+          </div>
+          <div>
+            <h4 style="font-size: 0.95rem; color: #fff; margin-bottom: 6px;">&#10003; Zero-Cloud Dependency</h4>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Hosts the complete web dashboard and SQLite datastore locally on the edge node, accessible over local factory Wi-Fi or Ethernet.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE TRI-MODAL INNOVATION -->
+  <section id="innovation" class="section-block" style="background: #060910;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Engineering Depth</span>
+        <h2 class="section-title">Why Single-Sensor Monitoring Fails MSMEs</h2>
+        <p class="section-subtitle">
+          Rotating machines undergo distinct physical degradation phases. Relying solely on vibration or temperature causes late detection or false alarms.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">&#128293;</div>
+          <h3 class="feature-title">Thermal Infrared (MLX90640)</h3>
+          <p class="feature-desc">
+            32&times;24 Far-Infrared thermopile array captures non-contact surface heat distribution. Identifies electrical winding hotspot degradation, poor motor ventilation, and severe friction before bearing seizure occurs.
+          </p>
+          <div style="margin-top: 16px; font-size: 0.8rem; font-family: var(--font-mono); color: var(--accent-cyan);">
+            &bull; Model: MobileNetV3-Small (96.1% top-3)
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">&#128266;</div>
+          <h3 class="feature-title">Vibration Dynamics (20 kHz)</h3>
+          <p class="feature-desc">
+            High-kHz contact accelerometer mounted on the Drive-End bearing housing. Computes RMS velocity and Kurtosis to isolate microscopic impact blows caused by bearing race spalls and shaft unbalance.
+          </p>
+          <div style="margin-top: 16px; font-size: 0.8rem; font-family: var(--font-mono); color: var(--accent-cyan);">
+            &bull; Model: NASA IMS Bearing Random Forest
+          </div>
+        </div>
+
+        <div class="feature-card">
+          <div class="feature-icon-wrapper">&#127911;</div>
+          <h3 class="feature-title">Acoustic Sound (16 kHz MEMS)</h3>
+          <p class="feature-desc">
+            Directional acoustic microphone captures airborne chattering, valve blow-by, and pump cavitation. Extracts 61 spectral and psychoacoustic MFCC features to catch micro-cracks before thermal rise starts.
+          </p>
+          <div style="margin-top: 16px; font-size: 0.8rem; font-family: var(--font-mono); color: var(--accent-cyan);">
+            &bull; Model: L2 Regularized Classifier (97.6% recall)
+          </div>
+        </div>
+      </div>
+
+      <!-- The Confidence Gate Feature -->
+      <div style="margin-top: 32px; background: var(--bg-card); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 12px; padding: 28px;">
+        <div style="display: flex; gap: 20px; align-items: flex-start; flex-wrap: wrap;">
+          <div style="font-size: 36px; line-height: 1;">&#128737;</div>
+          <div style="flex: 1; min-width: 280px;">
+            <h3 style="font-size: 1.3rem; margin-bottom: 8px;">The Core Differentiator: Layered False-Alarm Confidence Gate</h3>
+            <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6;">
+              In industrial condition monitoring, a false alarm that halts a production line is nearly as costly as a real defect. YantraSetu solves this with a three-tier gating protocol:
+            </p>
+            <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 16px;">
+              <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px;">
+                <strong style="color: #fff; font-size: 0.85rem;">1. Ambient Normalization</strong>
+                <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 4px;">Dynamic baseline floating that accounts for 44&deg;C Vidarbha summer heatwaves without tripping alarms.</p>
+              </div>
+              <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px;">
+                <strong style="color: #fff; font-size: 0.85rem;">2. Temporal Persistence</strong>
+                <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 4px;">Requires an anomaly to persist across consecutive rolling sampling frames before triggering warnings.</p>
+              </div>
+              <div style="background: rgba(255,255,255,0.03); padding: 12px; border-radius: 8px;">
+                <strong style="color: #fff; font-size: 0.85rem;">3. Transparent "Learning" State</strong>
+                <p style="font-size: 0.78rem; color: var(--text-dim); margin-top: 4px;">Displays "Unconfirmed / Learning" rather than a false trip when a model is statistically uncertain.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- BENCHMARK VALIDATION SECTION -->
+  <section id="benchmarks" class="section-block">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Empirical Rigor</span>
+        <h2 class="section-title">Validation Benchmarks &amp; Test Suite</h2>
+        <p class="section-subtitle">
+          Evaluated against globally recognized open-science machine health datasets and backed by 199 automated test cases.
+        </p>
+      </div>
+
+      <div class="styled-table-wrapper">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Evaluation Domain</th>
+              <th>Benchmark Dataset</th>
+              <th>Sample Scale</th>
+              <th>Key Performance Metric</th>
+              <th>Research Source</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Acoustic Machine Sound</strong></td>
+              <td>MIMII / DCASE Task 2 Benchmark</td>
+              <td>537 held-out evaluation clips</td>
+              <td><strong style="color: var(--accent-green);">97.6% Anomaly Recall</strong> (Macro-F1: 0.883)</td>
+              <td>Hitachi / IEEE DCASE Challenge</td>
+            </tr>
+            <tr>
+              <td><strong>Motor Thermography</strong></td>
+              <td>Induction Motor Thermal Benchmark</td>
+              <td>51 held-out test images (6 classes)</td>
+              <td><strong style="color: var(--accent-green);">96.1% Top-3 Accuracy</strong> (72.5% Top-1)</td>
+              <td>Mendeley Data Motor Thermography</td>
+            </tr>
+            <tr>
+              <td><strong>Bearing Run-to-Failure</strong></td>
+              <td>NASA IMS Bearing Dataset (20 kHz)</td>
+              <td>4 bearings over 30 days continuous</td>
+              <td><strong style="color: var(--accent-green);">Early warning 72 hrs prior</strong> to race spall</td>
+              <td>NSF I/UCR Center with Rexnord Corp</td>
+            </tr>
+            <tr>
+              <td><strong>Edge Software Integrity</strong></td>
+              <td>Pytest Automated Test Suite</td>
+              <td>199 automated unit/integration tests</td>
+              <td><strong style="color: var(--accent-green);">199 / 199 Tests Passing (100%)</strong></td>
+              <td>Continuous Integration Test Suite</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div style="margin-top: 24px; padding: 16px 20px; background: rgba(56, 189, 248, 0.05); border: 1px solid rgba(56, 189, 248, 0.2); border-radius: 8px; font-size: 0.85rem; color: var(--text-muted);">
+        <strong>Honesty &amp; Academic Disclosure:</strong> In adherence to rigorous research standards, current validation is conducted via calibrated benchmark replay through real inference models on the Raspberry Pi 4. The upcoming pilot instruments live physical sensors onto the university’s mechanical test motor.
+      </div>
+    </div>
+  </section>
+
+  <!-- HARDWARE BILL OF MATERIALS (BOM) & FEASIBILITY -->
+  <section id="bom" class="section-block" style="background: #060910;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Cost Transparency</span>
+        <h2 class="section-title">Itemized Hardware Bill of Materials (BOM)</h2>
+        <p class="section-subtitle">
+          Commercial condition monitoring vendors quote lakhs. YantraSetu provides a fully transparent, component-level cost breakdown for a complete production-grade monitoring node.
+        </p>
+      </div>
+
+      <div class="styled-table-wrapper">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Subsystem Component</th>
+              <th>Part Specification</th>
+              <th>Functional Purpose</th>
+              <th>Estimated Indian Retail Cost</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Edge Processing Computer</strong></td>
+              <td>Raspberry Pi 4 Model B (4 GB RAM)</td>
+              <td>Runs feature extractors, lightweight ML models, SQLite, and web server</td>
+              <td>&#8377;5,500 &ndash; &#8377;5,800</td>
+            </tr>
+            <tr>
+              <td><strong>Infrared Thermal Sensor</strong></td>
+              <td>Melexis MLX90640 (32&times;24 Far-IR array, I2C)</td>
+              <td>Continuous surface thermal gradient and bearing hotspot identification</td>
+              <td>&#8377;5,900 &ndash; &#8377;6,800</td>
+            </tr>
+            <tr>
+              <td><strong>High-kHz Vibration Sensor</strong></td>
+              <td>Industrial MEMS Accelerometer (ADXL1002/IIS3DWB + ADC)</td>
+              <td>High-frequency 20 kHz sampling for bearing defect impact frequencies</td>
+              <td>&#8377;3,800 &ndash; &#8377;4,500</td>
+            </tr>
+            <tr>
+              <td><strong>Acoustic Microphone</strong></td>
+              <td>Industrial MEMS Microphone + Baffle Enclosure</td>
+              <td>Airborne friction, chattering, and cavitation audio capture (16 kHz)</td>
+              <td>&#8377;1,200 &ndash; &#8377;1,500</td>
+            </tr>
+            <tr>
+              <td><strong>Mounting &amp; Cabling</strong></td>
+              <td>Rare-earth magnetic mounting stud, shielded M12 cabling</td>
+              <td>Rigid mechanical coupling to bearing housing; industrial noise immunity</td>
+              <td>&#8377;1,500 &ndash; &#8377;1,800</td>
+            </tr>
+            <tr>
+              <td><strong>Industrial Enclosure &amp; Power</strong></td>
+              <td>IP65 NEMA dust/oil casing, DIN-rail 5V/3A power supply</td>
+              <td>Protection against factory oil mist, metal shavings, and voltage surges</td>
+              <td>&#8377;1,600 &ndash; &#8377;2,000</td>
+            </tr>
+            <tr style="background: rgba(6, 182, 212, 0.08); font-weight: 700;">
+              <td colspan="3" style="color: #fff;">TOTAL PRODUCTION PILOT KIT COST (PER MACHINE)</td>
+              <td style="color: var(--accent-cyan); font-family: var(--font-mono); font-size: 1.1rem;">&#8377;19,500 &ndash; &#8377;22,400</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- ROI Box -->
+      <div class="grid-2" style="margin-top: 32px;">
+        <div class="feature-card">
+          <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 12px;">Economic Payback for Indian MSMEs</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); line-height: 1.6;">
+            A medium-sized pump or lathe unit in MIDC Hingna running 8 machines faces an average loss of &#8377;25,000 per hour during unplanned downtime. A single catastrophic motor burnout costs &#8377;45,000 in replacement, rewinding, and lost production. Installing YantraSetu (&#8377;21,000) achieves full payback in <strong>less than 60 days</strong>.
+          </p>
+        </div>
+        <div class="feature-card">
+          <h3 style="font-size: 1.1rem; color: #fff; margin-bottom: 12px;">Alignment with National Missions</h3>
+          <ul style="font-size: 0.88rem; color: var(--text-muted); line-height: 1.8; list-style: none;">
+            <li>&#10003; <strong>Make in India &amp; Atmanirbhar Bharat:</strong> Replaces imported German/American SCADA boxes with indigenous low-cost edge AI.</li>
+            <li>&#10003; <strong>MSME ZED Scheme:</strong> Helps small units attain "Zero Defect, Zero Effect" manufacturing certification.</li>
+            <li>&#10003; <strong>UN SDG 9 &amp; 12:</strong> Drives resilient industrial infrastructure and prevents premature motor disposal.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PILOT ROADMAP SECTION -->
+  <section id="pilot" class="section-block">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Implementation Trajectory</span>
+        <h2 class="section-title">12-Month Field Deployment Roadmap</h2>
+        <p class="section-subtitle">
+          A clear, phased execution plan taking YantraSetu from university benchtop validation to active shop-floor deployments in Nagpur’s industrial clusters.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="feature-card" style="border-top: 3px solid var(--accent-cyan);">
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-cyan); margin-bottom: 8px;">PHASE 1: MONTHS 0 &ndash; 3</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Benchtop Motor Instrumentation</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            Mount physical MLX90640, accelerometer, and microphone onto a 5 HP test induction motor in the RBU Mechanical Engineering Lab. Calibrate ambient floating baseline across morning and afternoon heat cycles.
+          </p>
+        </div>
+
+        <div class="feature-card" style="border-top: 3px solid var(--accent-amber);">
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-amber); margin-bottom: 8px;">PHASE 2: MONTHS 3 &ndash; 6</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Controlled Fault Seeding</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            Artificially introduce calibrated mechanical defects: 0.5 mm angular shaft misalignment, dynamic rotor unbalance masses, and outer-race EDM notches. Fine-tune the Confidence Gate under background shop noise.
+          </p>
+        </div>
+
+        <div class="feature-card" style="border-top: 3px solid var(--accent-green);">
+          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: var(--accent-green); margin-bottom: 8px;">PHASE 3: MONTHS 6 &ndash; 12</div>
+          <h3 style="font-size: 1.15rem; margin-bottom: 8px;">Industrial Shop-Floor Pilot</h3>
+          <p style="font-size: 0.88rem; color: var(--text-muted);">
+            Deploy 3 pilot monitoring kits on active rotating machinery in partner facilities: targeting Nagpur Municipal Corporation (NMC) water pump stations, an MSRTC bus maintenance depot, or MIDC Hingna pump units.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TEAM & COLLABORATION SECTION -->
+  <section id="team" class="section-block" style="background: #060910;">
+    <div class="container">
+      <div class="section-header">
+        <span class="section-tag">Project Stewardship</span>
+        <h2 class="section-title">The Engineering Team &amp; Faculty Guide</h2>
+        <p class="section-subtitle">
+          Interdisciplinary engineering team from Ramdeobaba University, combining edge computing, signal processing, and machine learning under the AICTE Idea Lab.
+        </p>
+      </div>
+
+      <div class="styled-table-wrapper" style="margin-bottom: 40px;">
+        <table class="styled-table">
+          <thead>
+            <tr>
+              <th>Member Name</th>
+              <th>Engineering Specialization</th>
+              <th>Core Project Responsibilities</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Vaishnav Balpande</strong></td>
+              <td>Team Lead &amp; Systems Architect</td>
+              <td>Edge hardware integration (Raspberry Pi), Linux runtime, pipeline synchronization</td>
+            </tr>
+            <tr>
+              <td><strong>Shreyank Nipane</strong></td>
+              <td>Vibration &amp; Signal Processing Lead</td>
+              <td>20 kHz accelerometer sampling, time-domain feature engineering, IMS baseline modeling</td>
+            </tr>
+            <tr>
+              <td><strong>Tanushri Sapate</strong></td>
+              <td>Acoustic Machine Learning Lead</td>
+              <td>16 kHz microphone pipeline, 61 MFCC audio features, logistic regression outlier model</td>
+            </tr>
+            <tr>
+              <td><strong>Aastha Pusdekar</strong></td>
+              <td>Thermal Computer Vision Lead</td>
+              <td>MLX90640 thermopile array decoding, MobileNetV3-Small motor hotspot classification</td>
+            </tr>
+            <tr>
+              <td><strong>Kartik Madankar</strong></td>
+              <td>Firmware &amp; UI Developer</td>
+              <td>FastAPI backend, WebSocket telemetry streaming, operator browser dashboard</td>
+            </tr>
+            <tr style="background: rgba(255, 255, 255, 0.04);">
+              <td><strong>Prof. Ashwini Lokhande</strong></td>
+              <td>Faculty Mentor &amp; Project Guide</td>
+              <td>Academic oversight, research methodology, test rig coordination, industry liaison</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pilot Request & Contact Box -->
+      <div class="grid-2" style="align-items: start;">
+        <div class="feature-card">
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 12px;">Contact Information</h3>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-bottom: 16px;">
+            We welcome inquiries from evaluators, industrial mentors, and MSME plant owners interested in hosting an early YantraSetu pilot.
+          </p>
+          <ul style="list-style: none; font-size: 0.9rem; line-height: 2;">
+            <li>&#128100; <strong>Project Lead:</strong> Vaishnav Balpande</li>
+            <li>&#128231; <strong>Direct Email:</strong> <a href="mailto:amazondevvaish@gmail.com">amazondevvaish@gmail.com</a></li>
+            <li>&#127979; <strong>Idea Lab Email:</strong> <a href="mailto:idealab@rknec.edu">idealab@rknec.edu</a></li>
+            <li>&#128205; <strong>Institution:</strong> AICTE Idea Lab, Ramdeobaba University, Katol Road, Nagpur, Maharashtra &ndash; 440013</li>
+            <li>&#128196; <strong>Official Pitch Deck:</strong> <a href="/assets/docs/pitch_deck.pdf" target="_blank">Download PDF (147 KB)</a></li>
+            <li>&#128203; <strong>Idea Lab Report:</strong> <a href="/assets/docs/idea_lab_report.pdf" target="_blank">Download Report (PDF)</a></li>
+          </ul>
+        </div>
+
+        <!-- Pilot Interest Form -->
+        <div class="feature-card">
+          <h3 style="font-size: 1.2rem; color: #fff; margin-bottom: 12px;">Request a Pilot / Partner With Us</h3>
+          <form onsubmit="alert('Thank you for expressing interest in YantraSetu! Our team will reach out within 24 hours.'); return false;">
+            <div class="form-group">
+              <label class="form-label">Full Name</label>
+              <input type="text" class="form-control" required placeholder="e.g. Ramesh Patel">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Organization / Workshop</label>
+              <input type="text" class="form-control" required placeholder="e.g. Patel Engineering Works, MIDC Hingna">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Email Address</label>
+              <input type="email" class="form-control" required placeholder="e.g. ramesh@pateleng.in">
+            </div>
+            <div class="form-group">
+              <label class="form-label">Critical Machine Asset for Pilot</label>
+              <select class="form-control">
+                <option>Three-Phase Induction Motor (1–20 HP)</option>
+                <option>Centrifugal Water / Chemical Pump</option>
+                <option>Gearbox &amp; Conveyor Drive</option>
+                <option>Air Compressor / Blower</option>
+              </select>
+            </div>
+            <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 8px;">
+              Submit Pilot Expression of Interest
+            </button>
+          </form>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Site Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <div class="brand-group" style="margin-bottom: 12px;">
+            <div class="brand-logo-icon" style="width: 32px; height: 32px; font-size: 16px;">&#9881;</div>
+            <div class="brand-text">
+              <h1 style="font-size: 1.05rem;">YANTRASETU</h1>
+              <span>AICTE Idea Lab Project 24CS03PR0504</span>
+            </div>
+          </div>
+          <p style="font-size: 0.85rem; color: var(--text-dim); line-height: 1.6;">
+            Bridging the gap between manual machinery inspection and high-cost industrial SCADA through edge-native tri-modal anomaly intelligence.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul>
+            <li><a href="#workbench">Interactive Workbench</a></li>
+            <li><a href="#innovation">Tri-Modal Innovation</a></li>
+            <li><a href="#prototype">Prototype Evidence</a></li>
+            <li><a href="#benchmarks">Validation Benchmarks</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Engineering</h4>
+          <ul>
+            <li><a href="#bom">Hardware BOM (&#8377;21k)</a></li>
+            <li><a href="#pilot">12-Month Pilot Plan</a></li>
+            <li><a href="/api/health" target="_blank">Health Check API</a></li>
+            <li><a href="/api/telemetry" target="_blank">Telemetry JSON Feed</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Downloads</h4>
+          <ul>
+            <li><a href="/assets/docs/pitch_deck.pdf" target="_blank">Pitch Deck PDF</a></li>
+            <li><a href="/assets/docs/idea_lab_report.pdf" target="_blank">Idea Lab Report</a></li>
+            <li><a href="https://github.com/NodeNexus/YantraSetu" target="_blank">GitHub Repository</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 YantraSetu Initiative &bull; Ramdeobaba University, Nagpur &bull; Seva Innovation Challenge 2026</div>
+        <div>Webservice Active on Render (Free Tier)</div>
+      </div>
+    </div>
   </footer>
 
+  <!-- Scripts -->
+  <script src="/assets/js/workbench.js"></script>
 </body>
 </html>

@@ -5,7 +5,7 @@ const path = require('path');
 const PORT = process.env.PORT || 3000;
 const HOST = '0.0.0.0';
 
-// Mock telemetry state generator for showcase
+// Mock telemetry generator for dynamic showcase
 function getMockTelemetry() {
   const now = new Date();
   const baseTemp = 42.5;
@@ -19,25 +19,25 @@ function getMockTelemetry() {
   return {
     timestamp: now.toISOString(),
     machine_id: 'MTR-IND-04',
-    machine_type: 'Three-Phase Induction Motor (5 HP)',
-    operational_status: 'Healthy / In Baseline',
+    machine_type: 'Three-Phase Induction Motor (5 HP, 1440 RPM)',
+    operational_status: 'Healthy / Normal Operation',
     modalities: {
       thermal: {
-        sensor: 'MLX90640 (32x24 IR Array)',
+        sensor: 'Melexis MLX90640 (32x24 IR Array)',
         mean_temperature_c: parseFloat(currentTemp),
-        max_hotspot_c: (parseFloat(currentTemp) + 8.4).toFixed(1),
+        max_hotspot_c: (parseFloat(currentTemp) + 7.8).toFixed(1),
         threshold_c: 75.0,
         status: parseFloat(currentTemp) > 65.0 ? 'WARNING' : 'NORMAL'
       },
       vibration: {
-        sensor: 'High-Frequency Accelerometer (20 kHz sampling)',
+        sensor: '20 kHz Contact Accelerometer (Drive End Bearing)',
         rms_g: parseFloat(vibRms),
-        kurtosis: (2.95 + Math.random() * 0.3).toFixed(2),
+        kurtosis: (2.90 + Math.random() * 0.25).toFixed(2),
         baseline_rms_g: 0.35,
         status: parseFloat(vibRms) > 0.6 ? 'WARNING' : 'NORMAL'
       },
       acoustic: {
-        sensor: 'Industrial MEMS Microphone (16 kHz)',
+        sensor: 'Directional MEMS Microphone (16 kHz)',
         sound_level_db: parseFloat(soundDb),
         anomaly_probability: parseFloat(acousticAnomalyScore),
         status: parseFloat(acousticAnomalyScore) > 0.4 ? 'WARNING' : 'NORMAL'
@@ -53,7 +53,14 @@ function getMockTelemetry() {
 
 const MIME_TYPES = {
   '.html': 'text/html; charset=utf-8',
+  '.css': 'text/css; charset=utf-8',
+  '.js': 'application/javascript; charset=utf-8',
   '.json': 'application/json; charset=utf-8',
+  '.png': 'image/png',
+  '.jpg': 'image/jpeg',
+  '.jpeg': 'image/jpeg',
+  '.svg': 'image/svg+xml',
+  '.pdf': 'application/pdf',
   '.txt': 'text/plain; charset=utf-8',
   '.ico': 'image/x-icon'
 };
@@ -80,10 +87,10 @@ const server = http.createServer((req, res) => {
     return;
   }
 
-  // Page Routing (Clean URLs or direct .html)
+  // Page Routing & Static File Serving
   let filePath = path.join(__dirname, 'public', urlPath === '/' ? 'index.html' : urlPath);
   
-  // If no extension, try appending .html
+  // If clean route without extension, try finding matching .html
   if (!path.extname(filePath)) {
     if (fs.existsSync(filePath + '.html')) {
       filePath = filePath + '.html';
@@ -92,8 +99,8 @@ const server = http.createServer((req, res) => {
     }
   }
 
-  const ext = path.extname(filePath);
-  const contentType = MIME_TYPES[ext] || 'text/html';
+  const ext = path.extname(filePath).toLowerCase();
+  const contentType = MIME_TYPES[ext] || 'application/octet-stream';
 
   fs.readFile(filePath, (err, content) => {
     if (err) {
@@ -102,11 +109,16 @@ const server = http.createServer((req, res) => {
         res.end(`
           <!DOCTYPE html>
           <html>
-          <head><title>404 Not Found - YantraSetu</title></head>
-          <body>
-            <h1>404 - Page Not Found</h1>
-            <p>The requested page was not found.</p>
-            <p><a href="/">Return to YantraSetu Home</a></p>
+          <head>
+            <title>404 Not Found - YantraSetu</title>
+            <link rel="stylesheet" href="/assets/css/style.css">
+          </head>
+          <body style="display:flex; align-items:center; justify-content:center; height:100vh; text-align:center;">
+            <div>
+              <h1 style="font-size:3rem; margin-bottom:12px;">404</h1>
+              <p style="color:var(--text-muted); margin-bottom:24px;">The requested showcase page or asset was not found.</p>
+              <a href="/" class="btn btn-primary">&larr; Return to YantraSetu Showcase</a>
+            </div>
           </body>
           </html>
         `);

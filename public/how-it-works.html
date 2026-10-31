@@ -3,157 +3,189 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>How It Works - YantraSetu</title>
+  <title>Technical Architecture &amp; Pipeline - YantraSetu</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 <body>
 
-  <!-- Header -->
-  <header>
-    <h1>YantraSetu: Technical Architecture & Pipeline</h1>
-    <p><em>End-to-End Tri-Modal Machine Health Monitoring on Edge Hardware</em></p>
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-inner">
+      <div class="brand-group">
+        <a href="/" style="text-decoration: none; display: flex; align-items: center; gap: 12px;">
+          <div class="brand-logo-icon">&#9881;</div>
+          <div class="brand-text">
+            <h1>YANTRASETU</h1>
+            <span>AICTE Idea Lab &bull; Project 24CS03PR0504</span>
+          </div>
+        </a>
+      </div>
+      <nav class="main-nav">
+        <a href="/">Overview</a>
+        <a href="/how-it-works" class="active">How It Works</a>
+        <a href="/live-demo">Live Telemetry</a>
+        <a href="/feasibility">BOM &amp; Feasibility</a>
+        <a href="/team">Team</a>
+        <a href="/#workbench" class="btn-header-cta">&bull; Test Interactive Console</a>
+      </nav>
+    </div>
   </header>
 
-  <hr>
-
-  <!-- Navigation -->
-  <nav>
-    <p>
-      <strong>Navigation:</strong>
-      <a href="/">Overview</a> |
-      <a href="/how-it-works">How It Works & Architecture</a> |
-      <a href="/live-demo">Live Telemetry Demo</a> |
-      <a href="/feasibility">BOM Cost & Feasibility</a> |
-      <a href="/team">Team & Pilot Request</a>
-    </p>
-  </nav>
-
-  <hr>
-
-  <main>
-
-    <!-- Architecture Diagram -->
-    <section>
-      <h2>1. System Architecture Flow</h2>
-      <pre>
-+-----------------------------------------------------------------------------------------+
-|                                1. PHYSICAL SENSOR LAYER                                 |
-|                                                                                         |
-|   [ Thermal IR Camera ]          [ 20 kHz Accelerometer ]       [ 16 kHz Microphone ]   |
-|     (MLX90640 Array)               (Piezo/MEMS on bearing)       (Industrial Acoustic)  |
-+------------------------------+-------------------------------+--------------------------+
-                               |                               |
-                               v                               v
-+-----------------------------------------------------------------------------------------+
-|                               2. EDGE INGESTION &amp; BUFFERING                              |
-|                              (Raspberry Pi 4 - Linux OS)                                |
-|   * Frame rate: 4-8 FPS          * Sampling: 20,480 pts/snap     * Audio windows: 1-2s  |
-|   * Radiant matrix decoding      * Rolling time-series buffer    * 16-bit PCM streaming |
-+------------------------------+-------------------------------+--------------------------+
-                               |                               |
-                               v                               v
-+-----------------------------------------------------------------------------------------+
-|                               3. FEATURE EXTRACTION PIPELINE                            |
-|                                                                                         |
-|   * Hotspot max/mean temp        * Time-domain: RMS, Kurtosis,   * 61 audio features:   |
-|   * Spatial gradient &amp; delta T     Crest Factor, Peak-to-Peak      MFCCs, Spectral Flux,|
-|   * Thermal centroid drift       * Freq-domain: FFT harmonics      Octave-band energies |
-+------------------------------+-------------------------------+--------------------------+
-                               |                               |
-                               v                               v
-+-----------------------------------------------------------------------------------------+
-|                               4. LIGHTWEIGHT ML INFERENCE                               |
-|                                                                                         |
-|   [ MobileNetV3-Small ]          [ Statistical Baseline &amp; RF ]   [ Logistic Regression] |
-|   (6 thermal health states)      (IMS Bearing anomaly curve)     (Acoustic outlier model)|
-+------------------------------+-------------------------------+--------------------------+
-                               |                               |
-                               v                               v
-+-----------------------------------------------------------------------------------------+
-|                               5. LAYERED CONFIDENCE GATE                                |
-|                                                                                         |
-|   * Suppresses isolated spurious spikes &amp; sensor noise                                   |
-|   * Temporal smoothing (consecutive anomaly requirement)                                |
-|   * Status logic: Healthy -&gt; Investigating (Not Sure) -&gt; Warning -&gt; Critical Alarm       |
-+-----------------------------------------------------------------------------------------+
-                               |
-                               v
-+-----------------------------------------------------------------------------------------+
-|                               6. OPERATOR CONSUMPTION LAYER                             |
-|                                                                                         |
-|   * Local Browser UI (React/HTML over local factory WiFi/Ethernet)                      |
-|   * Relay trigger for physical audio-visual siren tower                                 |
-|   * Optional SMS / WhatsApp alert dispatcher to plant supervisor                        |
-+-----------------------------------------------------------------------------------------+
-      </pre>
-    </section>
-
-    <hr>
-
-    <!-- The 3 Modalities -->
-    <section>
-      <h2>2. The Three Modalities Explained</h2>
-      
-      <h3>Modality A: Infrared Thermal Imaging</h3>
-      <p>
-        <strong>Role:</strong> Detects friction-induced heat buildup, inadequate bearing lubrication, electrical stator insulation degradation, and cooling fin clogging.
+  <main class="container" style="padding: 48px 24px 80px;">
+    
+    <div style="margin-bottom: 40px;">
+      <span class="badge-pill">TECHNICAL DEEP DIVE</span>
+      <h1 style="font-size: 2.5rem; font-weight: 800; margin: 12px 0 16px;">System Architecture &amp; Signal Pipeline</h1>
+      <p style="color: var(--text-muted); font-size: 1.1rem; max-width: 900px;">
+        An edge-native computing pipeline designed to process three heterogeneous, unsynchronized sensor streams (high-frequency vibration, thermal video, and audio) on a single Raspberry Pi 4 edge compute module.
       </p>
-      <ul>
-        <li><strong>Sensor:</strong> MLX90640 Far-Infrared sensor (32 &times; 24 thermopile array, 55&deg; or 110&deg; Field of View).</li>
-        <li><strong>Processing:</strong> Spatial temperature map analysis extracting maximum surface hotspot, mean casing temperature, and thermal gradient relative to ambient.</li>
-        <li><strong>Model:</strong> MobileNetV3-Small deep learning model trained on thermal motor images, achieving 96.1% top-3 accuracy across distinct operating conditions.</li>
-      </ul>
+    </div>
 
-      <h3>Modality B: High-Frequency Vibration Analysis</h3>
-      <p>
-        <strong>Role:</strong> Serves as the primary indicator for mechanical rotating defects—identifying bearing outer-race cracks, inner-race flaking, ball defect passing frequencies, and rotor unbalance.
-      </p>
-      <ul>
-        <li><strong>Sensor:</strong> Industrial contact accelerometer mounted via magnetic stud to the motor drive-end (DE) bearing housing.</li>
-        <li><strong>Processing:</strong> High-speed 20 kHz sampling capturing acceleration waveforms. Features include Root Mean Square (RMS) acceleration, Kurtosis (impulsiveness of impact blows), and Crest Factor.</li>
-        <li><strong>Model:</strong> Baseline statistical calibration combined with Random Forest classification calibrated on NASA IMS run-to-failure benchmarks.</li>
-      </ul>
+    <!-- Architecture Diagram Box -->
+    <div class="feature-card" style="margin-bottom: 48px; border-color: rgba(6, 182, 212, 0.4);">
+      <h3 style="font-size: 1.25rem; margin-bottom: 16px; color: #fff;">1. End-to-End Edge Pipeline Flowchart</h3>
+      <div style="background: #060911; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 20px; overflow-x: auto;">
+        <pre style="font-family: var(--font-mono); font-size: 0.82rem; color: #38bdf8; line-height: 1.5;">
++----------------------------------------------------------------------------------------------------+
+|                                    1. PHYSICAL SENSOR LAYER                                        |
+|                                                                                                    |
+|    [ Thermal IR Camera ]              [ 20 kHz Accelerometer ]            [ 16 kHz Microphone ]    |
+|   MLX90640 (32x24 Array)               ADXL1002 / IIS3DWB MEMS             Directional MEMS Baffle |
+|   (Stator &amp; Casing Heat)               (Bearing Housing Contact)           (Airborne Chattering)   |
++-----------------------------------+-----------------------------------+----------------------------+
+                                    |                                   |
+                                    v                                   v
++----------------------------------------------------------------------------------------------------+
+|                                   2. EDGE INGESTION &amp; BUFFERING                                    |
+|                                     (Raspberry Pi 4 Model B)                                       |
+|    * I2C Bus @ 400-1000 kHz           * High-Speed SPI ADC Bus            * ALSA Audio Subsystem   |
+|    * 4-8 FPS raw matrix frames        * 20,480-point rolling buffers      * 1-second 16-bit PCM    |
++-----------------------------------+-----------------------------------+----------------------------+
+                                    |                                   |
+                                    v                                   v
++----------------------------------------------------------------------------------------------------+
+|                                   3. FEATURE EXTRACTION PIPELINE                                   |
+|                                                                                                    |
+|    * Peak hotspot extraction          * Time Domain: RMS Velocity,        * 61 Psychoacoustic:     |
+|    * Mean casing temperature            Kurtosis, Crest Factor, Pk-Pk       MFCCs, Spectral Flux,  |
+|    * Spatial thermal gradient         * Frequency: FFT Harmonics (BPFO)     Octave Band Energies   |
++-----------------------------------+-----------------------------------+----------------------------+
+                                    |                                   |
+                                    v                                   v
++----------------------------------------------------------------------------------------------------+
+|                                   4. LIGHTWEIGHT ML INFERENCE                                      |
+|                                                                                                    |
+|    [ MobileNetV3-Small ]              [ IMS Baseline &amp; Random Forest ]     [ L2 Logistic Outlier ]  |
+|    Trained on Motor Thermography      Calibrated on Bearing Degradation   Trained on MIMII Audio   |
+|    (96.1% Top-3 Accuracy)             (Early Warning 72h Ahead)           (97.6% Anomaly Recall)   |
++-----------------------------------+-----------------------------------+----------------------------+
+                                    |                                   |
+                                    v                                   v
++----------------------------------------------------------------------------------------------------+
+|                                   5. THE LAYERED CONFIDENCE GATE                                   |
+|                                                                                                    |
+|    [ Ambient Normalization ]     ->   [ Temporal Persistence Filter ]  ->  [ Transparent Baseline ]|
+|    Dynamic floating threshold         Requires 3 consecutive anomalies     Displays "Unconfirmed"  |
+|    adapts to 44&deg;C heatwaves          suppresses dropped tool spikes       prevents false trips    |
++----------------------------------------------------------------------------------------------------+
+                                    |
+                                    v
++----------------------------------------------------------------------------------------------------+
+|                                   6. OPERATOR CONSUMPTION LAYER                                    |
+|                                                                                                    |
+|    * Local Browser Dashboard (FastAPI REST + WebSocket Telemetry)                                  |
+|    * Zero Cloud Dependency: Operates on plant local network                                        |
+|    * Physical relay output: Can trip warning strobe / siren tower on machine                       |
++----------------------------------------------------------------------------------------------------+
+        </pre>
+      </div>
+    </div>
 
-      <h3>Modality C: Acoustic Noise Emission</h3>
-      <p>
-        <strong>Role:</strong> Captures airborne mechanical chattering, high-frequency cavitation in pumps, valve leakage, and acoustic friction preceding measurable thermal rise.
-      </p>
-      <ul>
-        <li><strong>Sensor:</strong> Directional MEMS microphone enclosed in a directional acoustic baffle.</li>
-        <li><strong>Processing:</strong> 16 kHz audio streaming decomposed into 61 frequency and psychoacoustic features (Mel-Frequency Cepstral Coefficients, spectral centroid, spectral rolloff, and octave band energies).</li>
-        <li><strong>Model:</strong> L2-regularized acoustic anomaly detector achieving 97.6% recall on industrial sound benchmarks.</li>
-      </ul>
-    </section>
+    <!-- Modalities Grid -->
+    <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 24px;">2. The Three Sensor Modalities in Detail</h2>
+    
+    <div class="grid-3" style="margin-bottom: 48px;">
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">&#128293;</div>
+        <h3 class="feature-title">Infrared Thermography</h3>
+        <p class="feature-desc" style="margin-bottom: 16px;">
+          Non-contact thermal matrix monitoring identifies stator winding insulation degradation, motor cooling fan blockage, and lubrication starvation.
+        </p>
+        <table class="styled-table" style="font-size: 0.8rem;">
+          <tr><td><strong>Resolution</strong></td><td>32 &times; 24 pixels (768 points)</td></tr>
+          <tr><td><strong>Field of View</strong></td><td>55&deg; standard (110&deg; wide option)</td></tr>
+          <tr><td><strong>Refresh Rate</strong></td><td>4 &ndash; 8 Hz continuous</td></tr>
+          <tr><td><strong>Thermal Range</strong></td><td>-40&deg;C to +300&deg;C (&plusmn;1&deg;C)</td></tr>
+          <tr><td><strong>Primary Model</strong></td><td>MobileNetV3-Small PyTorch</td></tr>
+        </table>
+      </div>
 
-    <hr>
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">&#128266;</div>
+        <h3 class="feature-title">High-kHz Vibration Dynamics</h3>
+        <p class="feature-desc" style="margin-bottom: 16px;">
+          High-frequency contact accelerometer magnetically coupled to the bearing housing. Isolates micro-shocks caused by ball defects and race flaking.
+        </p>
+        <table class="styled-table" style="font-size: 0.8rem;">
+          <tr><td><strong>Sampling Rate</strong></td><td>20,000 samples / second (20 kHz)</td></tr>
+          <tr><td><strong>Snapshot Size</strong></td><td>20,480 points per rolling frame</td></tr>
+          <tr><td><strong>Time Features</strong></td><td>RMS Velocity, Kurtosis, Crest Factor</td></tr>
+          <tr><td><strong>Standard</strong></td><td>ISO 10816-3 Severity Guidelines</td></tr>
+          <tr><td><strong>Primary Model</strong></td><td>Statistical Baseline + Random Forest</td></tr>
+        </table>
+      </div>
 
-    <!-- The Confidence Gate -->
-    <section>
-      <h2>3. The Innovation: The Layered Confidence Gate</h2>
-      <p>
-        The primary operational flaw of early-generation machine health monitors on Indian shop floors is <strong>false alarm fatigue</strong>. When a tool drops near a motor or ambient factory temperatures spike at midday in Nagpur (exceeding 44&deg;C), conventional threshold alarms trigger false plant shutdowns. Operators quickly disconnect the sensors in frustration.
+      <div class="feature-card">
+        <div class="feature-icon-wrapper">&#127911;</div>
+        <h3 class="feature-title">Acoustic Noise Emission</h3>
+        <p class="feature-desc" style="margin-bottom: 16px;">
+          Acoustic directional microphone capturing airborne ultrasonic chattering, pump cavitation, and valve leakage preceding measurable heat rise.
+        </p>
+        <table class="styled-table" style="font-size: 0.8rem;">
+          <tr><td><strong>Audio Sampling</strong></td><td>16 kHz mono, 16-bit PCM</td></tr>
+          <tr><td><strong>Window Size</strong></td><td>1.0 &ndash; 2.0 second clips</td></tr>
+          <tr><td><strong>Feature Space</strong></td><td>61 MFCC &amp; Octave Band Features</td></tr>
+          <tr><td><strong>Recall Rate</strong></td><td>97.6% on held-out test sounds</td></tr>
+          <tr><td><strong>Primary Model</strong></td><td>L2-Regularized Logistic Classifier</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- The Mathematics of the Confidence Gate -->
+    <div class="feature-card" style="margin-bottom: 48px;">
+      <h2 style="font-size: 1.8rem; font-weight: 800; margin-bottom: 16px;">3. The False-Alarm Suppression Protocol</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; line-height: 1.6; margin-bottom: 24px;">
+        Traditional industrial monitors generate frequent false positives due to ambient factory noise and summer heatwaves. YantraSetu evaluates all incoming metrics through a formal mathematical gating function:
       </p>
-      <p>
-        YantraSetu resolves this through a three-stage gating mechanism:
-      </p>
-      <ol>
-        <li><strong>Ambient Normalization:</strong> Thermal thresholds dynamically adapt to ambient workshop temperatures rather than applying rigid static cutoffs.</li>
-        <li><strong>Temporal Confirmation:</strong> An anomaly must persist across multiple consecutive measurement windows before escalating from <em>Investigating</em> to <em>Warning</em>.</li>
-        <li><strong>Transparent "Not Sure" State:</strong> When sensor confidence drops below mathematical reliability thresholds, the system flags "Learning / Evaluating" instead of crying wolf.</li>
-      </ol>
-    </section>
+
+      <div style="background: #090e18; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 24px; font-family: var(--font-mono); font-size: 0.9rem; color: #f8fafc; line-height: 1.8;">
+        <p style="color: var(--accent-cyan); font-weight: 700;">// Layer 1: Ambient Thermal Normalization</p>
+        <p>&Delta;T<sub>casing</sub> = T<sub>hotspot</sub> &minus; T<sub>ambient_baseline</sub></p>
+        <p>If &Delta;T<sub>casing</sub> &gt; &theta;<sub>thermal</sub> (where &theta;<sub>thermal</sub> = 25.0&deg;C above floating ambient), flag thermal anomaly candidate.</p>
+        <br>
+        <p style="color: var(--accent-cyan); font-weight: 700;">// Layer 2: Temporal Persistence Filter (Sliding Window)</p>
+        <p>C<sub>anomaly</sub> = &sum; [ s(t &minus; i) ] &nbsp;for i = 0 to (W &minus; 1), where W = 3 consecutive windows</p>
+        <p>Trigger state: If C<sub>anomaly</sub> &lt; W &rarr; State = "UNCONFIRMED / INVESTIGATING" (No siren alarm triggered)</p>
+        <br>
+        <p style="color: var(--accent-cyan); font-weight: 700;">// Layer 3: Multi-Signal Decision Rule</p>
+        <p>If (Vibration_Anomaly == TRUE &amp;&amp; Acoustic_Anomaly == TRUE) &rarr; <span style="color: var(--accent-amber);">WARNING: Confirmed Mechanical Wear</span></p>
+        <p>If (Vibration_Anomaly == TRUE &amp;&amp; Thermal_Anomaly == TRUE) &rarr; <span style="color: var(--accent-red);">CRITICAL: Imminent Bearing Seizure</span></p>
+      </div>
+    </div>
+
+    <!-- Navigation CTA -->
+    <div style="text-align: center; margin-top: 40px;">
+      <a href="/#workbench" class="btn btn-primary" style="margin-right: 16px;">&bull; Test This Pipeline in the Interactive Workbench</a>
+      <a href="/feasibility" class="btn btn-secondary">Review Itemized Hardware BOM &rarr;</a>
+    </div>
 
   </main>
 
-  <hr>
-
-  <!-- Footer -->
-  <footer>
-    <p>
-      &copy; 2026 YantraSetu Innovation Initiative &bull; Idea Lab, Ramdeobaba University, Nagpur
-    </p>
-    <p>
-      <a href="/">Back to Overview</a> | <a href="/live-demo">Proceed to Live Demo &rarr;</a>
-    </p>
+  <footer class="site-footer">
+    <div class="container footer-bottom">
+      <div>&copy; 2026 YantraSetu &bull; Idea Lab, Ramdeobaba University, Nagpur</div>
+      <div><a href="/">Home</a> &bull; <a href="/how-it-works">Architecture</a> &bull; <a href="/feasibility">BOM</a> &bull; <a href="/team">Team</a></div>
+    </div>
   </footer>
 
 </body>
